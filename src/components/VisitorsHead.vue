@@ -1,12 +1,11 @@
 <template>
   <div id="headerVisitor">
-    <div id="title"><router-link  to="/">MyActivitiz</router-link></div>
+    <div id="title"><router-link to="/">MyActivitiz</router-link></div>
     <nav>
       <router-link to="/about">About</router-link>
       <router-link to="/login">Login</router-link>
       <router-link to="/signup">Signup</router-link>
     </nav>
-    <router-view />
   </div>
 </template>
 
@@ -16,7 +15,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 #headerVisitor{
   height: 20vh;
