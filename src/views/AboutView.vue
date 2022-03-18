@@ -72,7 +72,6 @@ export default {
   vertical-align: middle;
   height: 65vh;
   margin-bottom: 10px;
-  overflow-y: scroll;
 }
 
 .part1{

@@ -4,12 +4,12 @@
     <div id="contenu">
       <p id="title">Create a new account</p>
       <div id="form">
-        <form action="">
+        <form action="" @submit.prevent="sendData()">
           <label for="username">Username</label>
-          <input type="text" name="username" required v-model="username" placeholder="Enter your username"/>
+          <input required type="text" name="username" v-model="username" placeholder="Enter your username"/>
           <label for="password">Password</label>
-          <input type="password" name="password" required v-model="password" placeholder="Enter your password"/>
-          <button v-on:click="sendData()" type="submit">Register</button>
+          <input required type="password" name="password" v-model="password" placeholder="Enter your password"/>
+          <button type="submit">Register</button>
         </form>
       </div>
     </div>
@@ -36,14 +36,18 @@ export default {
     Footer,
   },
   methods: {
-    async sendData() {
+    sendData() {
       if (this.verifiyUsername(this.username) && this.verifiyPassword(this.password)){
-        await axios.post("http://localhost:4000/signup/", {username: this.username, password: this.password})
+        axios.post("http://localhost:4000/signup/", {
+          username: this.$CryptoJS.AES.encrypt(this.username,`${process.env.KEY}`).toString(), 
+          password: this.$CryptoJS.AES.encrypt(this.password,`${process.env.KEY}`).toString()})
         .then(response => {
+          console.log(response)
           alert("Your account has been created ! Please login now" || response)
           router.push('/login')
         }).catch(error =>{
-        return alert(error)
+          console.log(error)
+          alert(error)
       })
       } else if (!this.verifiyUsername(this.username) && !this.verifiyPassword(this.password)){
         return alert("Please enter a valid username.\nYour password must meet the following criteria:\n- contain at least 8 characters\n- contain at least 1 number\n- contain at least 1 lowercase character\n- contain at least 1 uppercase character\n- contains no spaces and no special character")

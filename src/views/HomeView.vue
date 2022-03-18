@@ -1,6 +1,7 @@
 <template>
 <div>
     <NavBar/>
+    <div id="contenu"></div>
     <Footer/>
 </div>
     
@@ -18,3 +19,9 @@ export default {
   },
 };
 </script>
+
+<style>
+#contenu{
+  height: 65vh;
+}
+</style>

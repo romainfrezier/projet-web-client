@@ -4,12 +4,12 @@
     <div id="contenu">
       <p id="title">Login to your account</p>
       <div id="form">
-        <form action="">
+        <form action="" @submit.prevent="sendData()">
           <label for="username">Username</label>
           <input type="text" name="username" required v-model="username" placeholder="Enter your username"/>
           <label for="password">Password</label>
           <input type="password" name="password" required v-model="password" placeholder="Enter your password"/>
-          <button v-on:click="sendData()" type="submit">Login</button>
+          <button type="submit">Login</button>
         </form>
       </div>
     </div>
@@ -18,10 +18,11 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from 'axios'; 
 import router from '../router/index.js'
 import Visitors from "../components/VisitorsHead.vue";
 import Footer from "../components/FooterAll.vue";
+
 export default {
   data(){
     return {
@@ -38,11 +39,10 @@ export default {
     async sendData(){
       if (this.verifiyUsername(this.username) && this.verifiyPassword(this.password)){
         await axios.post("http://localhost:4000/login/", { 
-          username: this.username,
-          password: this.password
+          username: this.$CryptoJS.AES.encrypt(this.username, `${process.env.KEY}`).toString(),
+          password: this.$CryptoJS.AES.encrypt(this.password, `${process.env.KEY}`).toString()
         })
         .then(response => {
-          console.log(response)
           localStorage.setItem("user", response.data.userId)
           localStorage.setItem("token", response.data.token)
           router.push('/home')
