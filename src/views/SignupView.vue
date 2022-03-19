@@ -1,7 +1,7 @@
 <template>
   <div>
     <Visitors></Visitors>
-    <div id="contenu">
+    <div id="content">
       <p id="title">Create a new account</p>
       <div id="form">
         <form action="" @submit.prevent="sendData()">
@@ -38,15 +38,13 @@ export default {
   methods: {
     sendData() {
       if (this.verifiyUsername(this.username) && this.verifiyPassword(this.password)){
-        axios.post("http://localhost:4000/signup/", {
-          username: this.$CryptoJS.AES.encrypt(this.username,`${process.env.KEY}`).toString(), 
-          password: this.$CryptoJS.AES.encrypt(this.password,`${process.env.KEY}`).toString()})
+        axios.post(process.env.VUE_APP_API+"/signup/", {
+          username: this.$CryptoJS.AES.encrypt(this.username,`${process.env.VUE_APP_KEY}`).toString(), 
+          password: this.$CryptoJS.AES.encrypt(this.password,`${process.env.VUE_APP_KEY}`).toString()})
         .then(response => {
-          console.log(response)
-          alert("Your account has been created ! Please login now" || response)
+          alert("Your account has been created ! Please login now !" || response)
           router.push('/login')
         }).catch(error =>{
-          console.log(error)
           alert(error)
       })
       } else if (!this.verifiyUsername(this.username) && !this.verifiyPassword(this.password)){
@@ -54,16 +52,16 @@ export default {
       } else if (this.verifiyUsername(this.username) && !this.verifiyPassword(this.password)){
         return alert("Your password must meet the following criteria:\n- contain at least 8 characters\n- contain at least 1 number\n- contain at least 1 lowercase character\n- contain at least 1 uppercase character\n- contains no spaces and no special character")
       } else if (!this.verifiyUsername(this.username) && this.verifiyPassword(this.password)){
-        return alert("Please enter a valid username")
+        return alert("Please enter a valid username.")
       }
       
     },
     verifiyUsername(username){
-      const re = /^(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}\S$/
+      const re = /^(?=.*[a-z])[0-9a-zA-Z]{5,}\S$/
       return re.test(username)
     },
     verifiyPassword(password){
-      const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}\S$/
+      const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{5,}\S$/
       return re.test(password)
     }
   }
@@ -71,7 +69,7 @@ export default {
 </script>
 
 <style scoped>
-#contenu{
+#content{
   height: 65vh;
   display: grid;
   grid-template-rows: 20% 80%;
@@ -101,7 +99,7 @@ form{
   display: flex;
   flex-direction: column;
   padding: 15px;
-  background-color: rgb(219, 219, 219);
+  background-color: rgba(219, 219, 219, 0.8);
   border: 2px solid rgb(232, 78, 70);
   border-radius: 10px;
 }
@@ -129,7 +127,7 @@ button {
   height: 40px;
   font-size: 25px;
   font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.517);
+  background-color: rgba(255, 255, 255, 0.5);
   border: 1px solid rgb(232, 78, 70);
   color: #4b1e1e;
   border-radius: 5px;
@@ -142,5 +140,6 @@ button {
 
 button:hover {
   height: 50px;
+  margin-bottom: 5px;
 }
 </style>

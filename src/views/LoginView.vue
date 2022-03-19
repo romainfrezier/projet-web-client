@@ -1,7 +1,7 @@
 <template>
   <div>
     <Visitors></Visitors>
-    <div id="contenu">
+    <div id="content">
       <p id="title">Login to your account</p>
       <div id="form">
         <form action="" @submit.prevent="sendData()">
@@ -9,7 +9,7 @@
           <input type="text" name="username" required v-model="username" placeholder="Enter your username"/>
           <label for="password">Password</label>
           <input type="password" name="password" required v-model="password" placeholder="Enter your password"/>
-          <button type="submit">Login</button>
+          <button type="submit" class="btn from-center">Login</button>
         </form>
       </div>
     </div>
@@ -22,6 +22,7 @@ import axios from 'axios';
 import router from '../router/index.js'
 import Visitors from "../components/VisitorsHead.vue";
 import Footer from "../components/FooterAll.vue";
+import { mapState } from 'vuex'
 
 export default {
   data(){
@@ -38,14 +39,16 @@ export default {
   methods:{
     async sendData(){
       if (this.verifiyUsername(this.username) && this.verifiyPassword(this.password)){
-        await axios.post("http://localhost:4000/login/", { 
-          username: this.$CryptoJS.AES.encrypt(this.username, `${process.env.KEY}`).toString(),
-          password: this.$CryptoJS.AES.encrypt(this.password, `${process.env.KEY}`).toString()
+        await axios.post(process.env.VUE_APP_API+"/login/", { 
+          username: this.$CryptoJS.AES.encrypt(this.username, `${process.env.VUE_APP_KEY}`).toString(),
+          password: this.$CryptoJS.AES.encrypt(this.password, `${process.env.VUE_APP_KEY}`).toString()
         })
         .then(response => {
-          localStorage.setItem("user", response.data.userId)
-          localStorage.setItem("token", response.data.token)
-          router.push('/home')
+          localStorage.setItem("user", this.$CryptoJS.AES.decrypt(response.data.userId, `${process.env.VUE_APP_KEY}`).toString(this.$CryptoJS.enc.Utf8))
+          localStorage.setItem("isPremium", this.$CryptoJS.AES.decrypt(response.data.isPremium, `${process.env.VUE_APP_KEY}`).toString(this.$CryptoJS.enc.Utf8))
+          localStorage.setItem("isAdmin", this.$CryptoJS.AES.decrypt(response.data.isAdmin, `${process.env.VUE_APP_KEY}`).toString(this.$CryptoJS.enc.Utf8))
+          localStorage.setItem("token", this.$CryptoJS.AES.decrypt(response.data.token, `${process.env.VUE_APP_KEY}`).toString(this.$CryptoJS.enc.Utf8))
+          router.push('/profil')
         })
         .catch(error => {
           alert(error)
@@ -60,19 +63,22 @@ export default {
       
     },
     verifiyUsername(username){
-      const re = /^(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}\S$/
+      const re = /^(?=.*[a-z])[0-9a-zA-Z]{5,}\S$/
       return re.test(username)
     },
     verifiyPassword(password){
-      const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}\S$/
+      const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{7,}\S$/
       return re.test(password)
     }
+  },
+  computed:{
+    ...mapState(['token', 'userId', 'isPremium', 'isAdmin'])
   }
 };
 </script>
 
 <style scoped>
-#contenu{
+#content{
   height: 65vh;
   display: grid;
   grid-template-rows: 20% 80%;
@@ -102,7 +108,7 @@ form{
   display: flex;
   flex-direction: column;
   padding: 15px;
-  background-color: rgb(219, 219, 219);
+  background-color: rgba(219, 219, 219, 0.8);
   border: 2px solid rgb(232, 78, 70);
   border-radius: 10px;
 }
@@ -130,7 +136,7 @@ button {
   height: 40px;
   font-size: 25px;
   font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.517);
+  background-color: rgba(255, 255, 255, 0.5);
   border: 1px solid rgb(232, 78, 70);
   color: #4b1e1e;
   border-radius: 5px;
@@ -143,5 +149,6 @@ button {
 
 button:hover {
   height: 50px;
+  margin-bottom: 5px;
 }
 </style>

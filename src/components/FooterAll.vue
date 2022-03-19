@@ -1,20 +1,10 @@
 <template>
   <div id="footer">
     <p>
-      <a
-        id="git"
-        href="https://github.com/romainfrz"
-        target="blank"
-        style="text-decoration: none; color: black"
-        >© Romain FREZIER - IG3</a
-      >
+      <a id="git" href="https://github.com/romainfrz" target="blank">© Romain FREZIER - IG3</a>
     </p>
     <a id="polytech" href="https://www.polytech.umontpellier.fr" target="blank">
-      <img
-        id="logoPolytech"
-        src="../assets/polytech.png"
-        alt="logo-polytech"
-      />
+      <img id="logoPolytech" src="../assets/polytech.png" alt="logo-polytech"/>
     </a>
   </div>
 </template>
@@ -51,6 +41,11 @@ export default {
   display: flex;
   align-items: center;
   margin: 0 auto;
+}
+
+#git{
+  color: #4b1e1e;
+  text-decoration: none;
 }
 
 #logoPolytech {

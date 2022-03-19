@@ -1,10 +1,19 @@
 <template>
   <div id="headerVisitor">
-    <div id="title"><router-link to="/home">MyActivitiz</router-link></div>
+    <div id="title"><router-link to="/profil">Poly'Activitiz</router-link></div>
     <nav>
-      <router-link to="/about">Users</router-link>
-      <router-link to="/login">Sports</router-link>
-      <router-link to="/signup">Competition</router-link>
+      <div id="status">
+        <p>{{ status }}</p>
+      </div>
+      <div id="tab">
+        <div class="admin"></div>
+        <router-link class="Admin" to="/users">Users</router-link>
+        <router-link to="/sports">Sports</router-link>
+        <router-link class="Premium" to="/competitions">Competitions</router-link>
+        <router-link to="/profil">My Profile</router-link>
+        <router-link to="/">Logout</router-link>
+      </div>
+      
     </nav>
   </div>
 </template>
@@ -12,6 +21,25 @@
 <script>
 export default {
   name: 'VisitorsPage',
+  data(){
+    return {
+      status:''
+    }
+  },
+  beforeMount(){
+    this.getStatus()
+  },
+  methods:{
+    getStatus(){
+      if(localStorage.getItem("isAdmin")){
+        this.status = "Admin"
+      } else if (localStorage.getItem("isPremium")){
+        this.status = "Premium"
+      } else {
+        this.status = "Classic"
+      }
+    }
+  }
 }
 </script>
 
@@ -22,12 +50,10 @@ export default {
 }
 
 nav {
-  margin-top: 0px;
-  padding: 40px;
   background-color: rgb(232, 78, 70);
-  text-align: right;
   color: #cbd3dc;
-
+  display: grid;
+  grid-template-columns: 10% 90%;
 }
 
 #title {
@@ -45,12 +71,31 @@ nav {
   user-select: none;
 }
 
-nav a {
+#status{
+  grid-column: 0;
+  display: flex;
+  user-select: none;
+  cursor: default;
+}
+
+#status p{
+  margin: auto;
+  font-size: 30px;
+  padding-left: 20px;
+}
+
+#tab{
+  grid-column: 2;
+  text-align: right;
+  padding: 40px;
+}
+
+#tab a {
+  margin-top: 10%;
   margin-left: 30px;
   font-size: 20px;
   font-weight: bold;
   color: #cbd3dc;
-  text-align: right;
   text-decoration: none;
   border: #4b1e1e solid 1px;
   border-radius: 5px;
@@ -58,7 +103,7 @@ nav a {
   user-select: none;
 }
 
-nav a.router-link-exact-active {
+#tab a.router-link-exact-active {
   color: #4b1e1e;
 }
 </style>

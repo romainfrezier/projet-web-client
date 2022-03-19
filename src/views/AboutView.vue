@@ -4,7 +4,21 @@
     <div id="about">
       <div class="part1">
         <p class="title">Personnal Presentation</p>
-        <p class="contenu">
+        <p class="content">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed harum
+          optio mollitia maxime! Qui voluptatem nemo voluptates fuga rem quod,
+          delectus libero, dolorem nesciunt voluptate ullam iste eligendi
+          doloribus asperiores a, itaque harum doloremque. Quas nobis facere
+          quasi, similique libero nostrum, dignissimos impedit voluptas
+          reiciendis labore iusto quos suscipit aperiam mollitia culpa, porro
+          aliquid quis quisquam dicta pariatur accusamus et animi alias vel.
+          Vero nisi soluta odio error. Modi quae tempora ex. Iusto obcaecati
+          nostrum ipsam accusantium facilis impedit ipsum est, ratione aliquid,
+          similique neque. Praesentium a quia eum numquam, alias repudiandae
+          odit molestias, omnis optio temporibus eaque officiis dolor.
+        </p>
+        <p class="title">Contact Me</p>
+        <p class="content">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed harum
           optio mollitia maxime! Qui voluptatem nemo voluptates fuga rem quod,
           delectus libero, dolorem nesciunt voluptate ullam iste eligendi
@@ -20,7 +34,7 @@
       </div>
       <div class="part2">
         <p class="title">Web Site Presentation</p>
-        <p class="contenu">
+        <p class="content">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
           repudiandae aliquid eveniet laborum officiis molestiae corporis
           quaerat, suscipit consequuntur perspiciatis non mollitia nisi
@@ -64,34 +78,51 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 
 #about {
   display: grid;
   grid-template-columns: 50% 50%;
   vertical-align: middle;
   height: 65vh;
-  margin-bottom: 10px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
 .part1{
-  border-right: solid 1px rgb(232, 78, 70);
   grid-column: 0;
   padding: 20px;
+  margin-bottom: 10px;
+  overflow-y: overlay;
 }
 
 .part2{
-  border-left: solid 1px rgb(232, 78, 70);
   grid-column: 2;
   padding: 20px;
+  margin-bottom: 10px;
+  overflow-y: overlay;
 }
 
 .title {
   font-size: 30px;
   font-weight: bold;
+  border-bottom: solid 1px #4b1e1e;
+  user-select: none;
+  cursor: default;
 }
 
-.contenu {
+.content {
   text-align: justify;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4b1e1e;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
 }
 </style>

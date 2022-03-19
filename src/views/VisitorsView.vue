@@ -21,10 +21,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #ad {
   height: 65vh;
-  margin-bottom: 10px;
   display: flex;
 }
 #ad-image {

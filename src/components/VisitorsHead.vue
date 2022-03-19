@@ -1,6 +1,6 @@
 <template>
   <div id="headerVisitor">
-    <div id="title"><router-link to="/">MyActivitiz</router-link></div>
+    <div id="title"><router-link to="/">Poly'Activitiz</router-link></div>
     <nav>
       <router-link to="/about">About</router-link>
       <router-link to="/login">Login</router-link>

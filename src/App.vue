@@ -6,9 +6,13 @@
 </template>
 
 <style>
+@font-face {
+  font-family: "LemonMilk";
+  src: url('./assets/LEMONMILK-Regular.otf');
+}
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: LemonMilk, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #4b1e1e;
