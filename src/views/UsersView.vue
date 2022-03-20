@@ -1,26 +1,23 @@
 <template>
   <div>
-    <NavBar />
+    <NavBar/>
     <div id="content"></div>
-    <Footer />
   </div>
 </template>
 
 <script>
 import NavBar from "../components/AuthHeader.vue";
-import Footer from "../components/FooterAll.vue";
 
 export default {
   name: "UsersView",
   components: {
     NavBar,
-    Footer,
   },
 };
 </script>
 
 <style scoped>
 #content {
-  height: 65vh;
+  height: 68vh;
 }
 </style>

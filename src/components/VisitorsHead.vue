@@ -17,10 +17,6 @@ export default {
 
 <style scoped>
 
-#headerVisitor{
-  height: 20vh;
-}
-
 nav {
   margin-top: 0px;
   padding: 40px;

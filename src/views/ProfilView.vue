@@ -3,36 +3,38 @@
     <NavBar />
     <div id="content">
       <div id="activity">
-        <p class="title">My Activities</p>
+        <p class="title">🏆 My Activities</p>
+          <ActivityTiles/>
+          <button class="add">➕ Add</button>
       </div>
       <div id="stat">
-        <p class="title">My Stats</p>
+        <p class="title">📶 My Stats</p>
       </div>
       <div id="item">
-        <p class="title">My Items</p>
+        <p class="title">🎿 My Items</p>
       </div>
       <div id="setting">
-        <p class="title">Settings</p>
+        <p class="title">⚙️ Settings</p>
         <div id="buttons">
           <button id="del">Delete Account</button>
           <button id="prem">{{ this.premium }} Premium Access</button>
-          <button id="change">Change username</button>
+          <button @click="logout()" id="logout">Log out</button>
         </div>
       </div>
     </div>
-    <Footer />
   </div>
 </template>
 
 <script>
 import NavBar from "../components/AuthHeader.vue";
-import Footer from "../components/FooterAll.vue";
+import ActivityTiles from "../components/ActivityTiles.vue"
+import router from "../router/index";
 
 export default {
   name: "ProfilView",
   components: {
     NavBar,
-    Footer,
+    ActivityTiles,
   },
   data(){
     return {
@@ -44,13 +46,16 @@ export default {
   },
   methods:{
     btnPremium(){
-      console.log(localStorage.getItem("isPremium"))
-      if (localStorage.getItem("isPremium")){
+      if (localStorage.getItem("isPremium") == "true"){
         this.premium = "Leave"
       }
       else{
         this.premium = "Get"
       }
+    }, 
+    logout(){
+      localStorage.clear()
+      router.push('/')
     }
   }
 };
@@ -58,10 +63,11 @@ export default {
 
 <style scoped>
 #content {
-  height: 65vh;
+  height: 68vh;
   display: grid;
   grid-template-rows: 60% 40%;
   grid-template-columns: 40% 30% 30%;
+  overflow-y: scroll;
 }
 
 .title{
@@ -131,13 +137,13 @@ export default {
 }
 
 #del{
-  border-color: red;
+  border: red 2px solid;
 }
 #prem{
-  border-color: gold;
+  border: goldenrod 2px solid;
 }
-#change{
-  border-color: rgb(77, 109, 214);
+#logout{
+  border: rgb(77, 109, 214) 2px solid;
 }
 
 #del:hover{
@@ -152,9 +158,23 @@ export default {
   font-size: 27px;
 }
 
-#change:hover{
+#logout:hover{
   border: 3px solid rgb(77, 109, 214);
   background-color: rgb(77, 109, 214);
   font-size: 27px;
+}
+
+.add{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-right: 25%;
+  margin-left: 25%;
+  width: 50%;
+  line-height: 35px;
+  padding: 10px;
+  border: #4b1e1e 1px solid;
+  border-radius: 10px;
+  background-color: rgba(194, 194, 194, 0.74);
 }
 </style>

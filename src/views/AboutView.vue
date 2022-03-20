@@ -62,19 +62,16 @@
         </p>
       </div>  
     </div>
-    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Visitors from "../components/VisitorsHead.vue";
-import Footer from "../components/FooterAll.vue"
 
 export default {
   name: "VisitorsView",
   components: {
     Visitors,
-    Footer
   },
 };
 </script>
@@ -84,7 +81,7 @@ export default {
   display: grid;
   grid-template-columns: 50% 50%;
   vertical-align: middle;
-  height: 65vh;
+  height: 68vh;
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 

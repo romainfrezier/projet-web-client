@@ -13,7 +13,6 @@
         </form>
       </div>
     </div>
-    <Footer></Footer>
   </div>
 </template>
 
@@ -21,7 +20,6 @@
 import axios from 'axios'; 
 import router from '../router/index.js'
 import Visitors from "../components/VisitorsHead.vue";
-import Footer from "../components/FooterAll.vue";
 import { mapState } from 'vuex'
 
 export default {
@@ -34,12 +32,11 @@ export default {
   name: "VisitorsView",
   components: {
     Visitors,
-    Footer,
   },
   methods:{
     async sendData(){
       if (this.verifiyUsername(this.username) && this.verifiyPassword(this.password)){
-        await axios.post(process.env.VUE_APP_API+"/login/", { 
+        await axios.post(process.env.VUE_APP_API+"login/", { 
           username: this.$CryptoJS.AES.encrypt(this.username, `${process.env.VUE_APP_KEY}`).toString(),
           password: this.$CryptoJS.AES.encrypt(this.password, `${process.env.VUE_APP_KEY}`).toString()
         })
@@ -47,7 +44,7 @@ export default {
           localStorage.setItem("user", this.$CryptoJS.AES.decrypt(response.data.userId, `${process.env.VUE_APP_KEY}`).toString(this.$CryptoJS.enc.Utf8))
           localStorage.setItem("isPremium", this.$CryptoJS.AES.decrypt(response.data.isPremium, `${process.env.VUE_APP_KEY}`).toString(this.$CryptoJS.enc.Utf8))
           localStorage.setItem("isAdmin", this.$CryptoJS.AES.decrypt(response.data.isAdmin, `${process.env.VUE_APP_KEY}`).toString(this.$CryptoJS.enc.Utf8))
-          localStorage.setItem("token", this.$CryptoJS.AES.decrypt(response.data.token, `${process.env.VUE_APP_KEY}`).toString(this.$CryptoJS.enc.Utf8))
+          localStorage.setItem("token", response.data.token)
           router.push('/profil')
         })
         .catch(error => {
@@ -79,7 +76,7 @@ export default {
 
 <style scoped>
 #content{
-  height: 65vh;
+  height: 68vh;
   display: grid;
   grid-template-rows: 20% 80%;
   align-items: center;

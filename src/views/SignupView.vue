@@ -13,8 +13,6 @@
         </form>
       </div>
     </div>
-    
-    <Footer></Footer>
   </div>
 </template>
 
@@ -22,7 +20,6 @@
 import axios from "axios";
 import router from "../router/index.js";
 import Visitors from "../components/VisitorsHead.vue";
-import Footer from "../components/FooterAll.vue";
 export default {
   data() {
     return {
@@ -33,12 +30,11 @@ export default {
   name: "VisitorsView",
   components: {
     Visitors,
-    Footer,
   },
   methods: {
     sendData() {
       if (this.verifiyUsername(this.username) && this.verifiyPassword(this.password)){
-        axios.post(process.env.VUE_APP_API+"/signup/", {
+        axios.post(process.env.VUE_APP_API+"signup/", {
           username: this.$CryptoJS.AES.encrypt(this.username,`${process.env.VUE_APP_KEY}`).toString(), 
           password: this.$CryptoJS.AES.encrypt(this.password,`${process.env.VUE_APP_KEY}`).toString()})
         .then(response => {
@@ -70,7 +66,7 @@ export default {
 
 <style scoped>
 #content{
-  height: 65vh;
+  height: 68vh;
   display: grid;
   grid-template-rows: 20% 80%;
   align-items: center;

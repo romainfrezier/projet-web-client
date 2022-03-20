@@ -7,11 +7,11 @@
       </div>
       <div id="tab">
         <div class="admin"></div>
+        <router-link to="/">Search</router-link>
         <router-link class="Admin" to="/users">Users</router-link>
         <router-link to="/sports">Sports</router-link>
         <router-link class="Premium" to="/competitions">Competitions</router-link>
         <router-link to="/profil">My Profile</router-link>
-        <router-link to="/">Logout</router-link>
       </div>
       
     </nav>
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'VisitorsPage',
+  name: 'AuthHeader',
   data(){
     return {
       status:''
@@ -31,23 +31,19 @@ export default {
   },
   methods:{
     getStatus(){
-      if(localStorage.getItem("isAdmin")){
+      if(localStorage.getItem("isAdmin") == "true"){
         this.status = "Admin"
-      } else if (localStorage.getItem("isPremium")){
+      } else if (localStorage.getItem("isPremium") == "true"){
         this.status = "Premium"
       } else {
         this.status = "Classic"
-      }
+      } 
     }
   }
 }
 </script>
 
 <style scoped>
-
-#headerVisitor{
-  height: 20vh;
-}
 
 nav {
   background-color: rgb(232, 78, 70);
@@ -91,9 +87,10 @@ nav {
 }
 
 #tab a {
-  margin-top: 10%;
+  margin: auto;
+  margin-right: 0px;
   margin-left: 30px;
-  font-size: 20px;
+  font-size: 100%;
   font-weight: bold;
   color: #cbd3dc;
   text-decoration: none;
