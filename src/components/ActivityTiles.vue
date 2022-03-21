@@ -1,8 +1,8 @@
 <template>
     <ul class="tiles"> 
         <li v-for="activity in activities" :key="activity.id" class="tile">
-            <p class="name">{{ activity.activityName }} | {{ activity.sportName }}</p>
-            <p class="date">{{ activity.date }}</p>
+            <p class="content">{{ activity.activityName }} | {{ activity.sportName }}</p>
+            <p class="content">{{ activity.date }}</p>
         </li>
     </ul>
 </template>
@@ -30,7 +30,7 @@ export default {
         this.activities = response.data
         this.activities.forEach(activity => {
           console.log(activity.sport)
-          axios.get(process.env.VUE_APP_API+"sports/"+activity.sport,
+          axios.get(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user").toString()+"/"+activity.sport,
             {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
             .then(response => {
               activity.sportName = response.data[0].sportName
@@ -71,14 +71,13 @@ ul {
   border-radius: 10px;
   user-select: none;
   text-align: center;
-  transition: 200ms;
 }
 
 .tile:hover{
   background-color: rgba(160, 53, 47, 0.65);
 }
 
-.name, .date{
+.content{
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;

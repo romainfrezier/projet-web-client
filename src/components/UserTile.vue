@@ -1,43 +1,42 @@
 <template>
-  <ul class="tiles"> 
-    <li v-for="sport in sports" :key="sport.id" class="tile" >
+  <ul class="tiles" v-if="onScreen"> 
+    <li v-for="user in users" :key="user.id" class="tile" >
       <div class="content">
-        <p>{{ sport.id }}. {{ sport.sportName }}</p>
-        <p>Period : {{ sport.sportPeriod }}</p>
+        <p>{{ user.id }}. {{ user.username }}</p>
+        <p>Admin : {{ user.isAdmin }}</p>
+        <p>Premium : {{ user.isPremium }}</p> 
       </div>
-        <div v-if="isAdmin" class="button">
+        <div class="button">
           <button class="write">✍️</button>
           <button class="delete">🚮</button>
         </div> 
     </li>
-  </ul> 
+  </ul>   
 </template>
 
 <script>
 import axios from 'axios';
 
 export default {
-  name: 'SportTile',
+  name: 'UserTile',
   data(){
     return {
-      sports: [{}],
-      isAdmin: false,
+      users: [{}],
+      onScreen: true,
     }
   },
   beforeMount(){
-    this.getSports()
+    this.getUsers()
   },
   methods:{
-    async getSports(){
-      await axios.get(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user").toString()+"/", 
+    async getUsers(){
+      await axios.get(process.env.VUE_APP_API+"users/"+localStorage.getItem("user").toString()+"/", 
         {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}}) 
       .then(response => {
-          this.sports = response.data
-          if(localStorage.getItem("isAdmin") == "true"){
-            this.isAdmin = true
-          }
+          this.users = response.data
         })
       .catch(error => {
+          this.onScreen = false
           console.log(error)
         })
     }
@@ -48,7 +47,7 @@ export default {
 <style scoped>
 
 .tiles{
-  height: 85%;
+  height: 100%;
   list-style: none;
   padding: 0;
   display: flex;
