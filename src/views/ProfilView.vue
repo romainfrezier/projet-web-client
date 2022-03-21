@@ -17,7 +17,7 @@
         <p class="title">⚙️ Settings</p>
         <div id="buttons">
           <button id="del">Delete Account</button>
-          <button id="prem">{{ this.premium }} Premium Access</button>
+          <button id="prem" @click="changePrem()">{{ this.premium }} Premium Access</button>
           <button @click="logout()" id="logout">Log out</button>
         </div>
       </div>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import NavBar from "../components/AuthHeader.vue";
 import ActivityTiles from "../components/ActivityTiles.vue"
 import router from "../router/index";
@@ -56,7 +57,32 @@ export default {
     logout(){
       localStorage.clear()
       router.push('/')
-    }
+    },
+    changePrem(){
+      if(this.premium == 'Leave'){
+        if(confirm("You are about to leave your premium subscription. Are you sure ?")){
+          axios.put(process.env.VUE_APP_API+"users/"+localStorage.getItem("user").toString()+"/"+localStorage.getItem("user").toString()+"/",
+            {isPremium: false},
+            {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
+            .then(response => {
+              console.log(response)
+              localStorage.setItem("isPremium", "false")
+              location.reload()})
+            .catch(error => {console.log(error)})
+        }
+      } else if (this.premium == "Get"){
+        if(confirm("You will subscribe to the premium for $5 (fake). Are you sure ?")){
+          axios.put(process.env.VUE_APP_API+"users/"+localStorage.getItem("user").toString()+"/"+localStorage.getItem("user").toString()+"/",
+            {isPremium: true},
+            {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
+            .then(response => {
+              console.log(response)
+              localStorage.setItem("isPremium", "true")
+              location.reload()})
+            .catch(error => {console.log(error)})
+        }
+      }
+    },
   }
 };
 </script>
@@ -150,18 +176,21 @@ export default {
   border: 3px solid red;
   background-color: red;
   font-size: 27px;
+  cursor: pointer;
 }
 
 #prem:hover{
   border: 3px solid gold;
   background-color: gold;
   font-size: 27px;
+  cursor: pointer;
 }
 
 #logout:hover{
   border: 3px solid rgb(77, 109, 214);
   background-color: rgb(77, 109, 214);
   font-size: 27px;
+  cursor: pointer;
 }
 
 .add{

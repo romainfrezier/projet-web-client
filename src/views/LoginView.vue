@@ -9,7 +9,7 @@
           <input type="text" name="username" required v-model="username" placeholder="Enter your username"/>
           <label for="password">Password</label>
           <input type="password" name="password" required v-model="password" placeholder="Enter your password"/>
-          <button type="submit" class="btn from-center">Login</button>
+          <button type="submit" class="btn">Login</button>
         </form>
       </div>
     </div>

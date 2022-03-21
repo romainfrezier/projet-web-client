@@ -3,7 +3,6 @@
     <NavBar />
     <div id="content">
       <SportTiles/>
-      <button class="add">➕ Add</button>
     </div>
   </div>
 </template>
@@ -25,17 +24,6 @@ export default {
 #content {
   height: 68vh;
 }
-.add{
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-  margin-right: 25%;
-  margin-left: 25%;
-  width: 50%;
-  line-height: 35px;
-  padding: 10px;
-  border: #4b1e1e 1px solid;
-  border-radius: 10px;
-  background-color: rgba(194, 194, 194, 0.74);
-}
+
+
 </style>

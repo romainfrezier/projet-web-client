@@ -34,7 +34,6 @@ export default {
             {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
             .then(response => {
               activity.sportName = response.data[0].sportName
-              console.log(this.activities)
             })
             .catch(error => {
                 console.log(error)
