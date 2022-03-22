@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="all">
   <div v-if="!form">
     <ul class="tiles" v-if="!form"> 
       <li v-for="sport in sports" :key="sport.id" class="tile" >
@@ -53,8 +53,8 @@ export default {
     this.getSports()
   },
   methods:{
-    async getSports(){
-      await axios.get(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user").toString()+"/", 
+    getSports(){
+      axios.get(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user").toString()+"/", 
         {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}}) 
       .then(response => {
           this.sports = response.data
@@ -77,7 +77,7 @@ export default {
     deleteSport(id){
       Notiflix.Confirm.show(
         "Delete sport",
-        "Do you want to delete user sport id : "+id+" ?",
+        "Do you want to delete sport with id : "+id+" ?",
         "Yes",
         "No",
         () => {
@@ -209,6 +209,10 @@ export default {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+}
+
+#all{
+  height: 100%;
   overflow-y: scroll;
 }
 

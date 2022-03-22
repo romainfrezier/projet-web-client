@@ -29,7 +29,6 @@ export default {
       .then(response => {
         this.activities = response.data
         this.activities.forEach(activity => {
-          console.log(activity.sport)
           axios.get(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user").toString()+"/"+activity.sport,
             {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
             .then(response => {

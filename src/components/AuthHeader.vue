@@ -6,11 +6,10 @@
         <p>{{ status }}</p>
       </div>
       <div id="tab">
-        <div class="admin"></div>
         <router-link to="/">Search</router-link>
-        <router-link class="Admin" to="/users">Users</router-link>
+        <router-link v-if="isAdmin" to="/users">Users</router-link>
         <router-link to="/sports">Sports</router-link>
-        <router-link class="Premium" to="/competitions">Competitions</router-link>
+        <!-- <router-link class="Premium" to="/competitions">Competitions</router-link> -->
         <router-link to="/profil">My Profile</router-link>
       </div>
       
@@ -23,7 +22,8 @@ export default {
   name: 'AuthHeader',
   data(){
     return {
-      status:''
+      status:'',
+      isAdmin: false,
     }
   },
   beforeMount(){
@@ -33,6 +33,7 @@ export default {
     getStatus(){
       if(localStorage.getItem("isAdmin") == "true"){
         this.status = "Admin"
+        this.isAdmin = true
       } else if (localStorage.getItem("isPremium") == "true"){
         this.status = "Premium"
       } else {
