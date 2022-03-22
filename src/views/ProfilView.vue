@@ -16,7 +16,7 @@
       <div id="setting">
         <p class="title">⚙️ Settings</p>
         <div id="buttons">
-          <button id="del">Delete Account</button>
+          <button id="del" @click="delAccount()">Delete Account</button>
           <button id="prem" @click="changePrem()">{{ this.premium }} Premium Access</button>
           <button @click="logout()" id="logout">Log out</button>
         </div>
@@ -27,6 +27,7 @@
 
 <script>
 import axios from 'axios'
+import Notiflix from 'notiflix'
 import NavBar from "../components/AuthHeader.vue";
 import ActivityTiles from "../components/ActivityTiles.vue"
 import router from "../router/index";
@@ -60,16 +61,34 @@ export default {
     },
     changePrem(){
       if(this.premium == 'Leave'){
-        if(confirm("You are about to leave your premium subscription. Are you sure ?")){
-          axios.put(process.env.VUE_APP_API+"users/"+localStorage.getItem("user").toString()+"/"+localStorage.getItem("user").toString()+"/",
-            {isPremium: false},
-            {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
-            .then(response => {
-              console.log(response)
-              localStorage.setItem("isPremium", "false")
-              location.reload()})
-            .catch(error => {console.log(error)})
-        }
+        Notiflix.Confirm.show(
+                "Premium Access",
+                "Do you want to leave your premium access ?",
+                "Yes",
+                "No",
+                () => {          
+                  axios.put(process.env.VUE_APP_API+"users/"+localStorage.getItem("user").toString()+"/"+localStorage.getItem("user").toString()+"/",
+                    {isPremium: false},
+                    {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
+                    .then(response => {
+                      Notiflix.Notify.success("Premium subscription leaved with succes", {closeButton:true})
+                      setTimeout("location.reload(true)", 2000)
+                      console.log(response)
+                      localStorage.setItem("isPremium", "false")})
+                    .catch(error =>{
+                      if(error.message.toString().includes('401')){
+                        Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+                      } else if(error.toString().includes('500')){
+                        Notiflix.Notify.failure("Server Error...", {closeButton:true})
+                      } else {
+                        Notiflix.Notify.failure("An error occured", {closeButton:true})
+                      }
+                      console.log(error)})
+                },
+                () => {
+                  Notiflix.Notify.info("Premium subscription is still alive", {closeButton:true})
+                },
+                {})
       } else if (this.premium == "Get"){
         if(confirm("You will subscribe to the premium for $5 (fake). Are you sure ?")){
           axios.put(process.env.VUE_APP_API+"users/"+localStorage.getItem("user").toString()+"/"+localStorage.getItem("user").toString()+"/",
@@ -83,6 +102,9 @@ export default {
         }
       }
     },
+    delAccount(){
+
+    }
   }
 };
 </script>
