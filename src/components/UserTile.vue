@@ -1,5 +1,5 @@
 <template>
-  <div class="tiles">
+  <div class="all">
     <div v-if="!form">
       <ul class="tiles" v-if="onScreen"> 
         <li v-for="user in users" :key="user.id" class="tile" >
@@ -19,7 +19,7 @@
       <p id="cross" @click="changeForm()">✖️</p>
       <form action="" @submit.prevent="sendData()">
         <label for="username">Username</label>
-        <input type="text" name="username" required v-model="username" placeholder="Enter the sport name"/>
+        <input type="text" name="username" required v-model="username" placeholder="Enter the username"/>
         <label for="premium">Premium</label>
         <input type="checkbox" name="premium" v-model="isPremium"/>
         <label for="admin">Admin</label>
@@ -32,6 +32,7 @@
 
 <script>
 import axios from 'axios';
+import Notiflix from 'notiflix'
 
 export default {
   name: 'UserTile',
@@ -56,19 +57,47 @@ export default {
       .then(response => {
           this.users = response.data
         })
-      .catch(error => {
+      .catch(error =>{
+          if(error.message.toString().includes('401')){
+            Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+          } else if(error.toString().includes('500')){
+            Notiflix.Notify.failure("Server Error...", {closeButton:true})
+          } else {
+            Notiflix.Notify.failure("An error occured", {closeButton:true})
+          }
           this.onScreen = false
           console.log(error)
         })
     },
     deleteUser(id){
-      if(confirm("Do you want to delete user with id : "+id)==true){
-        axios.delete(process.env.VUE_APP_API+"users/"+localStorage.getItem("user").toString()+"/"+id,
-        {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
-        .then(response => {console.log(response)})
-        .catch(error => {console.log(error)})
-        location.reload()
-      }
+      Notiflix.Confirm.show(
+        "Delete user",
+        "Do you want to delete user with id : "+id+" ?",
+        "Yes",
+        "No",
+        () => {
+          axios.delete(process.env.VUE_APP_API+"users/"+localStorage.getItem("user").toString()+"/"+id,
+            {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
+            .then(response => {
+              Notiflix.Notify.success("User " + id + ". deleted with succes", {closeButton:true})
+              setTimeout("location.reload(true)", 2000)
+              console.log(response)
+              })
+            .catch(error =>{
+              if(error.message.toString().includes('401')){
+                Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+              } else if(error.toString().includes('500')){
+                Notiflix.Notify.failure("Server Error...", {closeButton:true})
+              } else {
+                Notiflix.Notify.failure("An error occured", {closeButton:true})
+              }
+              console.log(error)})
+        },
+        () => {
+          Notiflix.Notify.info("User " + id + ". is not deleted", {closeButton:true})
+        },
+        {titleColor: "#ff5549", okButtonBackground: "#ff5549"}
+        )
     },
     changeForm(){
       this.form = !this.form
@@ -84,9 +113,15 @@ export default {
       this.id = id
       this.changeForm()
     },
-    async sendData(){
+    sendData(){
       if (this.verifiyUsername(this.sport)){
-        await axios.put(process.env.VUE_APP_API+"users/"+localStorage.getItem("user")+"/"+this.id+"/",{
+        Notiflix.Confirm.show(
+        "Modify user",
+        "Do you want to modify this user ?",
+        "Yes",
+        "No",
+        () => {
+        axios.put(process.env.VUE_APP_API+"users/"+localStorage.getItem("user")+"/"+this.id+"/",{
             username: this.username,
             isAdmin: this.isAdmin,
             isPremium: this.isPremium
@@ -98,11 +133,24 @@ export default {
             this.isPremium = false,
             this.isAdmin = false,
             this.id = ''
-            location.reload()
+            this.changeForm()
+            setTimeout("location.reload(true)", 2000)
+            Notiflix.Notify.success("User modified !", {closeButton:true})
         })
-        .catch(error => {
-            alert(error)
-        })
+        .catch(error =>{
+              if(error.message.toString().includes('401')){
+                Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+              } else if(error.toString().includes('500')){
+                Notiflix.Notify.failure("Server Error...", {closeButton:true})
+              } else {
+                Notiflix.Notify.failure("An error occured", {closeButton:true})
+              }
+              console.log(error)})
+        },
+        () => {
+          Notiflix.Notify.info("User is not modified", {closeButton:true})
+        },
+        {titleColor: "#ff5549", okButtonBackground: "#ff5549"})
       } else {
         return Error
       }  
@@ -119,6 +167,10 @@ export default {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+}
+
+.all{
+  height: 100%;
   overflow-y: scroll;
 }
 
@@ -126,7 +178,7 @@ export default {
   margin: auto;
   margin-bottom: 20px;
   padding: 10px;
-  width: 40%;
+  width: 45%;
   border: #4b1e1e 1px solid;
   border-radius: 10px;
   background-color: rgba(232, 78, 70, 0.65);

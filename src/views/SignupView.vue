@@ -20,6 +20,8 @@
 import axios from "axios";
 import router from "../router/index.js";
 import Visitors from "../components/VisitorsHead.vue";
+import Notiflix from 'notiflix'
+
 export default {
   data() {
     return {
@@ -38,17 +40,24 @@ export default {
           username: this.$CryptoJS.AES.encrypt(this.username,`${process.env.VUE_APP_KEY}`).toString(), 
           password: this.$CryptoJS.AES.encrypt(this.password,`${process.env.VUE_APP_KEY}`).toString()})
         .then(response => {
-          alert("Your account has been created ! Please login now !" || response)
+          Notiflix.Notify.success('Your account has been created ! Please login now !', {closeButton:true})
+          console.log(response)
           router.push('/login')
         }).catch(error =>{
-          alert(error)
+          if(error.message.toString().includes('400')){
+            Notiflix.Notify.failure("This username is already used", {closeButton:true})
+          } else if(error.toString().includes('500')){
+            Notiflix.Notify.failure("Server Error...", {closeButton:true})
+          } else {
+            Notiflix.Notify.failure("An error occured", {closeButton:true})
+          }
       })
       } else if (!this.verifiyUsername(this.username) && !this.verifiyPassword(this.password)){
-        return alert("Please enter a valid username.\nYour password must meet the following criteria:\n- contain at least 8 characters\n- contain at least 1 number\n- contain at least 1 lowercase character\n- contain at least 1 uppercase character\n- contains no spaces and no special character")
+        Notiflix.Notify.failure("Please enter a valid username.\nYour password must contain at least 8 characters, 1 number, 1 lowercase character, 1 uppercase character, no spaces and no special character", {closeButton:true})
       } else if (this.verifiyUsername(this.username) && !this.verifiyPassword(this.password)){
-        return alert("Your password must meet the following criteria:\n- contain at least 8 characters\n- contain at least 1 number\n- contain at least 1 lowercase character\n- contain at least 1 uppercase character\n- contains no spaces and no special character")
+        Notiflix.Notify.failure("Your password must contain at least 8 characters, 1 number, 1 lowercase character, 1 uppercase character, no spaces and no special character", {closeButton:true})
       } else if (!this.verifiyUsername(this.username) && this.verifiyPassword(this.password)){
-        return alert("Please enter a valid username.")
+        Notiflix.Notify.failure("Please enter a valid username.", {closeButton:true})
       }
       
     },

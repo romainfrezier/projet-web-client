@@ -20,7 +20,7 @@
 import axios from 'axios'; 
 import router from '../router/index.js'
 import Visitors from "../components/VisitorsHead.vue";
-import { mapState } from 'vuex'
+import Notiflix from 'notiflix'
 
 export default {
   data(){
@@ -47,15 +47,21 @@ export default {
           localStorage.setItem("token", response.data.token)
           router.push('/profil')
         })
-        .catch(error => {
-          alert(error)
+        .catch(error =>{
+          if(error.message.toString().includes('401')){
+            Notiflix.Notify.failure("Wrong password or username", {closeButton:true})
+          } else if(error.toString().includes('500')){
+            Notiflix.Notify.failure("Server Error...", {closeButton:true})
+          } else {
+            Notiflix.Notify.failure("An error occured", {closeButton:true})
+          }
         })
       } else if (!this.verifiyUsername(this.username) && !this.verifiyPassword(this.password)){
-        return alert("Please enter a valid username and password.")
+        Notiflix.Notify.failure("Please enter a valid username and password.", {closeButton:true})
       } else if (this.verifiyUsername(this.username) && !this.verifiyPassword(this.password)){
-        return alert("Please enter a valid password")
+        Notiflix.Notify.failure("Please enter a valid password", {closeButton:true})
       } else if (!this.verifiyUsername(this.username) && this.verifiyPassword(this.password)){
-        return alert("Please enter a valid username")
+        Notiflix.Notify.failure("Please enter a valid username", {closeButton:true})
       }
       
     },
@@ -67,9 +73,6 @@ export default {
       const re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{7,}\S$/
       return re.test(password)
     }
-  },
-  computed:{
-    ...mapState(['token', 'userId', 'isPremium', 'isAdmin'])
   }
 };
 </script>

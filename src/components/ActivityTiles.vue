@@ -74,6 +74,7 @@ ul {
 
 .tile:hover{
   background-color: rgba(160, 53, 47, 0.65);
+  cursor: pointer;
 }
 
 .content{
@@ -81,7 +82,6 @@ ul {
   margin-top: 10px;
   margin-bottom: 10px;
   user-select: none;
-  cursor: default;
 }
 
 ::-webkit-scrollbar {

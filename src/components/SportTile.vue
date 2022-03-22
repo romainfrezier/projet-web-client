@@ -33,6 +33,7 @@
 
 <script>
 import axios from 'axios';
+import Notiflix from 'notiflix';
 
 export default {
   name: 'SportTile',
@@ -61,18 +62,46 @@ export default {
             this.isAdmin = true
           }
         })
-      .catch(error => {
-          console.log(error)
+      .catch(error =>{
+          if(error.message.toString().includes('401')){
+            Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+          } else if(error.toString().includes('500')){
+            Notiflix.Notify.failure("Server Error...", {closeButton:true})
+          } else {
+            Notiflix.Notify.failure("An error occured", {closeButton:true})
+          }
           this.onScreen = false;
+          console.log(error)
         })
     },
     deleteSport(id){
-      if(confirm("Do you want to delete sport with id : "+id)==true){
-        axios.delete(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user").toString()+"/"+id,
-        {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
-        .then(response => {console.log(response);location.reload()})
-        .catch(error => {console.log(error)})
-      }
+      Notiflix.Confirm.show(
+        "Delete sport",
+        "Do you want to delete user sport id : "+id+" ?",
+        "Yes",
+        "No",
+        () => {
+          axios.delete(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user").toString()+"/"+id,
+            {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
+            .then(response => {
+              Notiflix.Notify.success("Sport " + id + ". deleted with succes", {closeButton:true})
+              setTimeout("location.reload(true)", 2000)
+              console.log(response)
+              })
+            .catch(error =>{
+              if(error.message.toString().includes('401')){
+                Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+              } else if(error.toString().includes('500')){
+                Notiflix.Notify.failure("Server Error...", {closeButton:true})
+              } else {
+                Notiflix.Notify.failure("An error occured", {closeButton:true})
+              }
+              console.log(error)})
+          },
+        () => {
+          Notiflix.Notify.info("Sport " + id + ". is not deleted", {closeButton:true})
+        },
+        { titleColor: "#ff5549", okButtonBackground: "#ff5549" })
     },
     writeSport(id, name, period){
       this.changeForm()
@@ -86,41 +115,74 @@ export default {
       this.sport = ''
       this.period = ''
     },
-    async sendData(){
+    sendData(){
       if(!this.write){
         if (this.verifiySport(this.sport) && this.verifiyPeriod(this.period)){
-          await axios.post(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user")+"/",{
-              sportName: this.sport,
-              sportPeriod: this.period
+          Notiflix.Confirm.show(
+          "Create sport",
+          "Do you want to create this sport ?",
+          "Yes",
+          "No",
+          () => {
+            axios.post(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user")+"/",{
+                sportName: this.sport,
+                sportPeriod: this.period
+            },
+            {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}}) 
+            .then(response => {
+                console.log(response)
+                this.changeForm()
+                setTimeout("location.reload(true)", 2000)
+                Notiflix.Notify.success("Sport created !", {closeButton:true})
+            })
+            .catch(error => {
+                if(error.message.toString().includes('401')){
+                  Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+                } else if(error.toString().includes('500')){
+                  Notiflix.Notify.failure("Server Error...", {closeButton:true})
+                } else {
+                  Notiflix.Notify.failure("An error occured", {closeButton:true})
+                }
+                console.log(error)})},
+          () => {
+            Notiflix.Notify.info("Sport is not created", {closeButton:true})
           },
-          {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}}) 
-          .then(response => {
-              console.log(response)
-              this.changeForm()
-              location.reload()    
-          })
-          .catch(error => {
-              alert(error)
-          })
+          { titleColor: "#ff5549", okButtonBackground: "#ff5549" })
         } else {
           return Error
         }  
       } else {
         if (this.verifiySport(this.sport) && this.verifiyPeriod(this.period)){
-          console.log("la")
-          await axios.put(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user")+"/"+this.id+"/",{
-              sportName: this.sport,
-              sportPeriod: this.period
+          Notiflix.Confirm.show(
+          "Modify sport",
+          "Do you want to modify this sport ?",
+          "Yes",
+          "No",
+          () => {
+            axios.put(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user")+"/"+this.id+"/",{
+                sportName: this.sport,
+                sportPeriod: this.period
+            },
+            {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}}) 
+            .then(response => {
+                console.log(response)
+                this.changeForm()
+                setTimeout("location.reload(true)", 2000)
+                Notiflix.Notify.success("Sport modified !", {closeButton:true})
+            })
+            .catch(error => {
+                if(error.message.toString().includes('401')){
+                  Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+                } else if(error.toString().includes('500')){
+                  Notiflix.Notify.failure("Server Error...", {closeButton:true})
+                } else {
+                  Notiflix.Notify.failure("An error occured", {closeButton:true})
+                }
+                console.log(error)})},
+          () => {
+            Notiflix.Notify.info("Sport is not modified", {closeButton:true})
           },
-          {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}}) 
-          .then(response => {
-              console.log(response)
-              this.changeForm()
-              location.reload() 
-          })
-          .catch(error => {
-              alert(error)
-          })
+          { titleColor: "#ff5549", okButtonBackground: "#ff5549" })
         } else {
           return Error
         } 

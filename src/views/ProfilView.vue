@@ -206,4 +206,10 @@ export default {
   border-radius: 10px;
   background-color: rgba(194, 194, 194, 0.74);
 }
+
+.add:hover{
+  cursor: pointer;
+  align-items: center;
+  background-color: rgba(139, 139, 139, 0.74);
+}
 </style>
