@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="all">
     <NavBar />
     <div id="content">
       <SportTiles/>
@@ -9,7 +9,7 @@
 
 <script>
 import NavBar from "../components/AuthHeader.vue";
-import SportTiles from "../components/SportTile.vue"
+import SportTiles from "../components/SportTiles.vue"
 
 export default {
   name: "SportsView",
@@ -22,8 +22,10 @@ export default {
 
 <style scoped>
 #content {
-  height: 68vh;
+  height: 80%;
 }
 
-
+#all{
+  height: 90vh;
+}
 </style>

@@ -1,16 +1,15 @@
 <template>
-  <div id="headerVisitor">
+  <div id="headerAuth">
     <div id="title"><router-link to="/profil">Poly'Activitiz</router-link></div>
     <nav>
       <div id="status">
         <p>{{ status }}</p>
       </div>
       <div id="tab">
-        <router-link to="/">Search</router-link>
-        <router-link v-if="isAdmin" to="/users">Users</router-link>
-        <router-link to="/sports">Sports</router-link>
-        <!-- <router-link class="Premium" to="/competitions">Competitions</router-link> -->
-        <router-link to="/profil">My Profile</router-link>
+        <router-link to="/search">🔎 Search</router-link>
+        <router-link v-if="isAdmin" to="/users">👨‍💻 Users</router-link>
+        <router-link to="/sports">⚽️ Sports 🎾</router-link>
+        <router-link to="/profil">🙋‍♂️ My Profile</router-link>
       </div>
       
     </nav>
@@ -45,10 +44,14 @@ export default {
 </script>
 
 <style scoped>
+#headerAuth{
+  position: sticky;
+  top: 0;
+}
 
 nav {
-  background-color: rgb(232, 78, 70);
-  color: #cbd3dc;
+  background-color: #222831;
+  color: #EEEEEE;
   display: grid;
   grid-template-columns: 10% 90%;
 }
@@ -56,15 +59,15 @@ nav {
 #title {
   width: 100%;
   font-size: 40px;
-  border-bottom: solid black 1px;
+  border-bottom: solid #222831 1px;
   margin-bottom: 5px;
-  color: #4b1e1e;
+  color: #222831;
   text-align: center;
 }
 
 #title a {
   text-decoration: none;
-  color: #4b1e1e;
+  color: #222831;
   user-select: none;
 }
 
@@ -93,15 +96,15 @@ nav {
   margin-left: 30px;
   font-size: 100%;
   font-weight: bold;
-  color: #cbd3dc;
+  color: #EEEEEE;
   text-decoration: none;
-  border: #4b1e1e solid 1px;
+  border: #FFD369 solid 1px;
   border-radius: 5px;
   padding: 20px;
   user-select: none;
 }
 
 #tab a.router-link-exact-active {
-  color: #4b1e1e;
+  color: #FFD369;
 }
 </style>

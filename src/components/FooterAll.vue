@@ -17,8 +17,10 @@ export default {
 
 <style>
 #footer {
+  position: sticky;
+  bottom: 0px;
   height: 10vh;
-  background-color: rgb(232, 78, 70);
+  background-color: #222831;
   width: 100%;
   display: flex;
   align-items: center;
@@ -44,7 +46,7 @@ export default {
 }
 
 #git{
-  color: #4b1e1e;
+  color: #EEEEEE;
   text-decoration: none;
 }
 

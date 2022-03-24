@@ -16,28 +16,32 @@ export default {
 </script>
 
 <style scoped>
+#headerVisitor{
+  position: sticky;
+  top: 0;
+}
 
 nav {
   margin-top: 0px;
   padding: 40px;
-  background-color: rgb(232, 78, 70);
+  background-color: #222831;
   text-align: right;
-  color: #cbd3dc;
+  color: #EEEEEE;
 
 }
 
 #title {
   width: 100%;
   font-size: 40px;
-  border-bottom: solid black 1px;
+  border-bottom: solid #222831 1px;
   margin-bottom: 5px;
-  color: #4b1e1e;
+  color: #222831;
   text-align: center;
 }
 
 #title a {
   text-decoration: none;
-  color: #4b1e1e;
+  color: #222831;
   user-select: none;
 }
 
@@ -45,16 +49,16 @@ nav a {
   margin-left: 30px;
   font-size: 20px;
   font-weight: bold;
-  color: #cbd3dc;
+  color: #EEEEEE;
   text-align: right;
   text-decoration: none;
-  border: #4b1e1e solid 1px;
+  border: #FFD369 solid 1px;
   border-radius: 5px;
   padding: 20px;
   user-select: none;
 }
 
 nav a.router-link-exact-active {
-  color: #4b1e1e;
+  color: #FFD369;
 }
 </style>

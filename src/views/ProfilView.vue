@@ -1,48 +1,33 @@
 <template>
   <div id="all">
     <NavBar />
-    <div v-if="!isForm" id="content">
+    <div id="content">
       <div id="activity">
         <p class="title">🏆 My Activities</p>
-          <ActivityTiles/>
-          <button class="add">➕ Add</button>
+        <ActivityTiles/>
+        <button class="add"><router-link to="/activityForm">➕ Add</router-link></button>
       </div>
       <div id="stat">
         <p class="title">📶 My Stats</p>
+        <StatTiles/>
       </div>
       <div id="item">
         <p class="title">🎿 My Items</p>
         <p v-if="!isPremium" id="ad">This section will be available if you subscribe to premium access</p>
         <div v-if="isPremium">
           <ItemTiles/>
-          <button @click="changeFormItem()" class="add">➕ Add</button>
+          <button class="add"><router-link to="/item">➕ Add</router-link></button>
         </div>
       </div>
       <div id="setting">
         <p class="title">⚙️ Settings</p>
         <div id="buttons">
-          <button id="del" @click="delAccount()">Delete Account</button>
-          <button id="prem" @click="changePrem()">{{ this.premium }} Premium Access</button>
-          <button @click="logout()" id="logout">Log out</button>
+          <button id="del" @click="delAccount()">Delete Account 🚮</button>
+          <button id="prem" @click="changePrem()">{{ this.premium }} Premium Access 💳</button>
+          <button @click="logout()" id="logout">Log out 💤</button>
         </div>
       </div>
     </div>
-
-    <div id="itemForm" v-if="isForm && isItem">
-      <p id="cross" @click="changeFormItem()">✖️</p>
-      <form action="" @submit.prevent="sendDataItem()">
-        <label for="itemName">Item Name</label>
-        <input type="text" name="itemName" required v-model="item" placeholder="Enter the item name"/>
-        <label for="usage">Usage</label>
-        <input type="text" name="usage" v-model="usage" placeholder="Enter the usage (optionnal)"/>
-        <label for="sport">Sport</label>
-        <select id="sport" v-model="sport">
-          <option disabled value="">Choose...</option>
-          <option v-for="sport in sports" :key="sport.id" :value="sport.id">{{ sport.sportName }}</option>
-        </select>
-        <button type="submit" class="btn">Submit</button>
-      </form>
-  </div>
   </div>
 </template>
 
@@ -52,6 +37,7 @@ import Notiflix from 'notiflix'
 import NavBar from "../components/AuthHeader.vue";
 import ActivityTiles from "../components/ActivityTiles.vue"
 import ItemTiles from "../components/ItemTiles.vue"
+import StatTiles from "../components/StatTiles.vue"
 import router from "../router/index";
 
 export default {
@@ -59,26 +45,25 @@ export default {
   components: {
     NavBar,
     ActivityTiles,
-    ItemTiles
+    ItemTiles,
+    StatTiles
   },
   data(){
     return {
       premium:'',
       isPremium: false,
-      isForm: false,
-      isItem: false,
-      isActivity: false,
-      item: '',
-      usage: '',
-      sport:'',
-      sports: [{}],
+      isAdmin: false,
     }
-  },
-  beforeMount(){
+  },beforeMount(){
     this.btnPremium()
-    this.getSports()
+    this.admin()
   },
   methods:{
+    admin(){
+      if (localStorage.getItem("isAdmin") == "true"){
+        this.isAdmin = true
+      }
+    },
     btnPremium(){
       if (localStorage.getItem("isPremium") == "true"){
         this.premium = "Leave"
@@ -87,23 +72,6 @@ export default {
       else{
         this.premium = "Get"
       }
-    },
-    getSports(){
-      axios.get(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user").toString()+"/", 
-        {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}}) 
-      .then(response => {
-          this.sports = response.data
-        })
-      .catch(error =>{
-          if(error.message.toString().includes('401')){
-            Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
-          } else if(error.toString().includes('500')){
-            Notiflix.Notify.failure("Server Error...", {closeButton:true})
-          } else {
-            Notiflix.Notify.failure("An error occured", {closeButton:true})
-          }
-          console.log(error)
-        })
     }, 
     logout(){
       localStorage.clear()
@@ -199,38 +167,13 @@ export default {
         },
         { titleColor: "#ff5549", okButtonBackground: "#ff5549" })
     },
-    changeFormItem(){
-      this.isForm = !this.isForm
-      this.isItem = !this.isItem
-      this.item = ''
-      this.usage = ''
-    },
-    sendDataItem(){
-      let usage
-      if(this.usage == ""){
-        usage = null
-      } else {
-        usage = this.usage
-      }
-      axios.post(process.env.VUE_APP_API+"items/"+localStorage.getItem('user')+"/",
-        {itemName: this.item, usage: usage, sport: this.sport, user: localStorage.getItem('user')},
-        {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
-        .then(response => {
-          console.log(response)
-          this.changeFormItem()
-          Notiflix.Notify.success("Item created", {closeButton:true})
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }
   }
 };
 </script>
 
 <style scoped>
 #content {
-  height: 68vh;
+  height: 70vh;
   display: grid;
   grid-template-rows: 60% 40%;
   grid-template-columns: 40% 30% 30%;
@@ -238,7 +181,7 @@ export default {
 }
 
 #all{
-  height: 100%;
+  height: 90vh;
 }
 
 .title{
@@ -246,8 +189,9 @@ export default {
   line-height: 60px;
   margin: 0px ;
   text-align: center;
-  border-bottom: solid 2px #4b1e1e;
-  background-color: rgba(232, 78, 70, 0.65);
+  border-bottom: solid 2px #FFD369;
+  border-radius: 7px;
+  background-color: #393E46;
   user-select: none;
   cursor: default;
 }
@@ -255,36 +199,36 @@ export default {
 #activity{
   grid-column: 1;
   grid-row: 1 / 3;
-  background-color: rgba(219, 219, 219, 0.74);
+  background-color: #EEEEEE80;
   margin: 10px;
-  border: solid 3px #4b1e1e;
+  border: solid 3px #FFD369;
   border-radius: 10px;
 }
 
 #stat{
   grid-column: 2;
   grid-row: 1;
-  background-color: rgba(219, 219, 219, 0.74);
+  background-color: #EEEEEE80;
   margin: 10px;
-  border: solid 3px #4b1e1e;
+  border: solid 3px #FFD369;
   border-radius: 10px;
 }
 
 #item{
   grid-column:  3;
   grid-row: 1;
-  background-color: rgba(219, 219, 219, 0.74);
+  background-color: #EEEEEE80;
   margin: 10px;
-  border: solid 3px #4b1e1e;
+  border: solid 3px #FFD369;
   border-radius: 10px;
 }
 
 #setting{
   grid-column: 2 / 4;
   grid-row: 2;
-  background-color: rgba(219, 219, 219, 0.74);
+  background-color: #EEEEEE80;
   margin: 10px;
-  border: solid 3px #4b1e1e;
+  border: solid 3px #FFD369;
   border-radius: 10px;
 }
 
@@ -298,7 +242,7 @@ export default {
   margin: auto;
   font-family: LemonMilk, Avenir, Helvetica, Arial, sans-serif;
   font-size: 25px;
-  color: #4b1e1e;
+  color: #222831;
   width: 30%;
   height: 80%;
   padding: 10px;
@@ -343,18 +287,32 @@ export default {
   text-align: center;
   margin-right: 25%;
   margin-left: 25%;
+  margin-bottom: 10px;
   width: 50%;
-  line-height: 35px;
   padding: 10px;
-  border: #4b1e1e 1px solid;
+  border: #393E46 1px solid;
   border-radius: 10px;
-  background-color: rgba(194, 194, 194, 0.74);
+  background-color: #22283180;
+  text-decoration: none;
+  color: #222831;
+}
+
+.add > a {
+  text-decoration: none;
+  color: #222831;
+  height: 100%;
+  width: 100px;
+}
+
+.add > a:hover {
+  color: #FFD369;
 }
 
 .add:hover{
   cursor: pointer;
   align-items: center;
-  background-color: rgba(139, 139, 139, 0.74);
+  background-color: #222831;
+  color: #FFD369;
 }
 
 #ad{
@@ -367,80 +325,15 @@ export default {
   transform: rotate(-30deg);
 }
 
-#itemForm{
-  height: 67vh;
+::-webkit-scrollbar {
+  width: 5px;
 }
 
-form{
-  display: inline-flex;
-  margin: auto;
-  grid-row: 2;
-  width: 50%;
-  max-width: 600px;
-  height: 70%;
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
-  background-color: rgba(219, 219, 219, 0.8);
-  border: 2px solid rgb(232, 78, 70);
-  border-radius: 10px;
+::-webkit-scrollbar-thumb {
+  background: #22283180;
 }
 
-input{
-  margin-bottom: 40px;
-  font-size: 2vh;
-  border: 1px solid rgb(232, 78, 70);
-  border-radius: 5px;
-  padding: 10px;
-  color: #4b1e1e;
-  background-color: rgba(255, 255, 255, 0.517);
-}
-
-select{
-  color: #4b1e1e;
-  border: 1px solid rgb(232, 78, 70);
-  border-radius: 5px;
-  font-size: 25px;
-  margin-bottom: 40px;
-}
-
-label{
-  font-size: 30px;
-  font-weight: bold;
-  color: #4b1e1e;
-  border-bottom: solid 1px rgb(232, 78, 70);
-  margin-bottom: 5px;
-}
-
-form > button {
-  width: 150px;
-  height: 40px;
-  font-size: 25px;
-  font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgb(232, 78, 70);
-  color: #4b1e1e;
-  border-radius: 5px;
-  text-align: center;
-  margin: auto;
-  margin-bottom: 10px;
-  transition: 200ms;
-  cursor: pointer;
-}
-
-form > button:hover {
-  height: 50px;
-  margin-bottom: 5px;
-}
-
-#cross{
-  margin: 10px;
-  padding: 10px;
-  color: #4b1e1e;
-  font-size: 50px;
-}
-
-#cross:hover{
-  cursor: pointer;
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
 }
 </style>

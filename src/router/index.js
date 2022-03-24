@@ -5,8 +5,10 @@ import LoginView from '../views/LoginView.vue'
 import SignupView from '../views/SignupView.vue'
 import UsersView from '../views/UsersView.vue'
 import SportsView from '../views/SportsView.vue'
-import CompetitionsView from '../views/CompetitionsView.vue'
 import ProfilView from '../views/ProfilView.vue'
+import ItemView from '../views/ItemFormView.vue'
+import activityFormView from '../views/ActivityFormView.vue'
+import SearchView from '../views/SearchView.vue'
 
 const routes = [
   {
@@ -40,15 +42,25 @@ const routes = [
     component: SportsView
   },
   {
-    path: '/competitions',
-    name: 'competitions',
-    component: CompetitionsView
-  },
-  {
     path: '/profil',
     name: 'profil',
     component: ProfilView
   },
+  {
+    path: '/search',
+    name: 'search',
+    component: SearchView
+  },
+  {
+    path: '/item',
+    name: 'item',
+    component: ItemView
+  },
+  {
+    path: '/activityForm',
+    name: 'activityForm',
+    component: activityFormView
+  }
 ]
 
 const router = createRouter({

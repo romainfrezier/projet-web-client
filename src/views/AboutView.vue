@@ -81,7 +81,8 @@ export default {
   display: grid;
   grid-template-columns: 50% 50%;
   vertical-align: middle;
-  height: 68vh;
+  height: 75vh;
+  color: #393E46;
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
@@ -100,15 +101,18 @@ export default {
 }
 
 .title {
+  margin-top: 60px;
+  margin-bottom: 30px;
   font-size: 30px;
   font-weight: bold;
-  border-bottom: solid 1px #4b1e1e;
+  border-bottom: solid 1px #FFD369;
   user-select: none;
   cursor: default;
 }
 
 .content {
   text-align: justify;
+  font-size: 20px;
 }
 
 ::-webkit-scrollbar {
@@ -116,7 +120,7 @@ export default {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4b1e1e;
+  background: #393E46;
 }
 
 ::-webkit-scrollbar-track {

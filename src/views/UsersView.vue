@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="all">
     <NavBar/>
     <div id="content">
       <User/>
@@ -9,7 +9,7 @@
 
 <script>
 import NavBar from "../components/AuthHeader.vue";
-import User from "../components/UserTile.vue"
+import User from "../components/UserTiles.vue"
 
 export default {
   name: "UsersView",
@@ -22,6 +22,10 @@ export default {
 
 <style scoped>
 #content {
-  height: 68vh;
+  height: 80%;
+}
+
+#all{
+  height: 90vh;
 }
 </style>

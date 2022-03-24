@@ -1,8 +1,14 @@
 <template>
     <ul class="tiles"> 
-        <li v-for="item in items" :key="item.id" class="tile" @click="deleteItem(item.id)">
-            <p class="content">{{ item.itemName }} | {{ item.sport }}</p>
-            <p class="content">{{ item.usage }}</p>
+        <li v-for="item in itemsAll" :key="item.id" class="tile">
+            <div class="content">
+              <p>{{ item.itemName }}</p>
+              <p>{{ item.sport }}</p>
+              <p>{{ item.usage }} km</p>
+            </div>
+            <div class="button">
+              <button @click="deleteItem(item.id, item.itemName)" class="delete">🚮</button>
+            </div>
         </li>
     </ul>
 </template>
@@ -15,43 +21,34 @@ export default {
     name:'ItemTiles',
     data(){
         return {
-            items: [{}]
+            itemsAll: [{}]
         }
     },
     beforeMount(){
         this.getItems()
     },
     methods:{
-        getItems(){
-            axios.get(process.env.VUE_APP_API+"items/"+localStorage.getItem('user')+"/",
+        async getItems(){
+            await axios.get(process.env.VUE_APP_API+"items/"+localStorage.getItem('user')+"/",
                 {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
                 .then(response => {
-                    console.log(response.data)
-                    this.items = response.data
-                    this.items.forEach(item => {
-                        console.log(item.sport)
-                        axios.get(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user").toString()+"/"+item.sport,
-                            {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
-                            .then(response => {
-                            item.sport = response.data[0].sportName
-                            })
-                            .catch(error => {
-                                console.log(error)
-                            })
-                    })
+                    this.itemsAll = response.data
+                })
+                .catch(error => {
+                    console.log(error)
                 })
         },
-        deleteItem(id){
+        deleteItem(id, name){
              Notiflix.Confirm.show(
             "Delete item",
-            "Do you want to delete item with id : "+id+" ?",
+            "Do you want to delete item named : "+name+" ?",
             "Yes",
             "No",
             () => {
                 axios.delete(process.env.VUE_APP_API+"items/"+localStorage.getItem('user')+"/"+id+"/",
                     {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
                     .then(response => {
-                        Notiflix.Notify.success("Item " + id + ". deleted with succes", {closeButton:true})
+                        Notiflix.Notify.success("Item " + name + " deleted with succes", {closeButton:true})
                         setTimeout("location.reload(true)", 2000)
                         console.log(response)
                     })
@@ -66,7 +63,7 @@ export default {
                         console.log(error)})
             },
             () => {
-                Notiflix.Notify.info("Item " + id + ". is not deleted", {closeButton:true})
+                Notiflix.Notify.info("Item " + name + " is not deleted", {closeButton:true})
             },
             { titleColor: "#ff5549", okButtonBackground: "#ff5549" })
         }
@@ -81,25 +78,27 @@ ul {
 }
 
 .tiles{
-  height: 22vh;
+  height: 20vh;
   margin-top: 10px;
   overflow-y: scroll;
   margin-bottom: 15px;
 }
 
 .tile{
-  background-color: rgba(232, 78, 70, 0.65);
+  background-color: #22283180;
   margin: 10px;
   margin-bottom: 20px;
   padding: 5px;
-  border: #4b1e1e 1px solid;
+  border: #222831 1px solid;
   border-radius: 10px;
   user-select: none;
   text-align: center;
+  display: grid;
+  grid-template-columns: 70% 30%;
 }
 
 .tile:hover{
-  background-color: rgba(160, 53, 47, 0.65);
+  background-color: #393E46;
   cursor: pointer;
 }
 
@@ -108,6 +107,31 @@ ul {
   margin-top: 10px;
   margin-bottom: 10px;
   user-select: none;
+  grid-column: 1;
+}
+
+.button{
+  grid-column: 2;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button > button{
+  margin: auto;
+  height: 60px;
+  width: 60px;
+  font-size: 30px;
+  background-color: #22283180;
+  border: #EEEEEE 1px solid;
+  border-radius: 10px;
+  transition: 200ms;
+}
+
+.button > button:hover{
+  background-color: #EEEEEE80;
+  font-size: 40px;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {
@@ -115,7 +139,7 @@ ul {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4b1e1e;
+  background: #22283180;
 }
 
 ::-webkit-scrollbar-track {

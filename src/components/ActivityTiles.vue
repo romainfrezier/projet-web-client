@@ -1,47 +1,75 @@
 <template>
     <ul class="tiles"> 
-        <li v-for="activity in activities" :key="activity.id" class="tile">
-            <p class="content">{{ activity.activityName }} | {{ activity.sportName }}</p>
-            <p class="content">{{ activity.date }}</p>
+        <li v-for="(activity) in this.activities" :key="activity.id" class="tile">
+            <div class="content">
+              <p>{{ activity.activityName }}</p>
+              <p>{{ activity.sport }}</p>
+              <p>{{ activity.date }}</p>
+            </div>
+            <div class="button">
+              <button @click="seeActivity()" class="see">👀</button>
+              <button @click="deleteActivity(activity.id, activity.activityName)" class="delete">🚮</button>
+            </div>
         </li>
     </ul>
 </template>
 
 <script>
 import axios from 'axios';
+import Notiflix from 'notiflix'
 
 export default {
   name: 'ActivityTiles',
   data(){
     return {
-      premium:'',
       activities: [{}],
     }
   },
-  beforeMount(){
+  mounted(){
     this.getActivities()
   },
   methods:{
-    getActivities(){
+    async getActivities(){
       const user = localStorage.getItem("user").toString()
-      axios.get(process.env.VUE_APP_API+"activities/"+user+"/", 
+      await axios.get(process.env.VUE_APP_API+"activities/"+user+"/", 
         {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}}) 
-      .then(response => {
-        this.activities = response.data
-        this.activities.forEach(activity => {
-          axios.get(process.env.VUE_APP_API+"sports/"+localStorage.getItem("user").toString()+"/"+activity.sport,
-            {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
-            .then(response => {
-              activity.sportName = response.data[0].sportName
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        .then(response => {
+          this.activities = response.data
+          console.log(this.activities)
         })
-        })
-      .catch(error => {
+        .catch(error => {
           console.log(error)
         })
+    },
+    deleteActivity(id, name){
+      Notiflix.Confirm.show(
+        "Delete activity",
+        "Do you want to delete activity named : "+name+" ?",
+        "Yes",
+        "No",
+        () => {
+          axios.delete(process.env.VUE_APP_API+"stats/"+localStorage.getItem('user')+"/"+id+"/",
+            {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
+            .then(response => {
+                Notiflix.Notify.success("Activity " + name + " deleted with succes", {closeButton:true})
+                setTimeout("location.reload(true)", 2000)
+                console.log(response)
+            })
+            .catch(error =>{
+              if(error.message.toString().includes('401')){
+                  Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+              } else if(error.toString().includes('500')){
+                  Notiflix.Notify.failure("Server Error...", {closeButton:true})
+              } else {
+                  Notiflix.Notify.failure("An error occured", {closeButton:true})
+              }
+              console.log(error)})
+            },
+        () => {
+          Notiflix.Notify.info("Activity " + name + " is not deleted", {closeButton:true})
+        },
+        { titleColor: "#ff5549", okButtonBackground: "#ff5549" }
+      )
     }
   }
 }
@@ -56,23 +84,25 @@ ul {
 .tiles{
   margin-top: 10px;
   overflow-y: scroll;
-  height: 70%;
+  height: 50vh;
   margin-bottom: 15px;
 }
 
 .tile{
-  background-color: rgba(232, 78, 70, 0.65);
+  background-color: #22283180;
   margin: 10px;
   margin-bottom: 20px;
   padding: 5px;
-  border: #4b1e1e 1px solid;
+  border: #222831 1px solid;
   border-radius: 10px;
   user-select: none;
   text-align: center;
+  display: grid;
+  grid-template-columns: 70% 30%;
 }
 
 .tile:hover{
-  background-color: rgba(160, 53, 47, 0.65);
+  background-color: #393E46;
   cursor: pointer;
 }
 
@@ -81,6 +111,31 @@ ul {
   margin-top: 10px;
   margin-bottom: 10px;
   user-select: none;
+  grid-column: 1;
+}
+
+.button{
+  grid-column: 2;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button > button{
+  margin: auto;
+  height: 60px;
+  width: 60px;
+  font-size: 30px;
+  background-color: #22283180;
+  border: #EEEEEE 1px solid;
+  border-radius: 10px;
+  transition: 200ms;
+}
+
+.button > button:hover{
+  background-color: #EEEEEE80;
+  font-size: 40px;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {
@@ -88,7 +143,7 @@ ul {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #4b1e1e;
+  background: #22283180;
 }
 
 ::-webkit-scrollbar-track {

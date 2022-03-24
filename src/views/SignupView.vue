@@ -75,7 +75,7 @@ export default {
 
 <style scoped>
 #content{
-  height: 68vh;
+  height: 75vh;
   display: grid;
   grid-template-rows: 20% 80%;
   align-items: center;
@@ -87,7 +87,8 @@ export default {
   text-align: center;
   font-size: 50px;
   font-weight: bold;
-  border-bottom: solid rgb(232, 78, 70) 1px;
+  color: #393E46;
+  border-bottom: solid #FFD369 1px;
 }
 
 #form{
@@ -104,26 +105,25 @@ form{
   display: flex;
   flex-direction: column;
   padding: 15px;
-  background-color: rgba(219, 219, 219, 0.8);
-  border: 2px solid rgb(232, 78, 70);
+  background-color: #393E46;
+  border: 2px solid #FFD369;
   border-radius: 10px;
 }
 
 input{
   margin-bottom: 40px;
   font-size: 2vh;
-  border: 1px solid rgb(232, 78, 70);
+  color: #EEEEEE;
+  border: 1px solid #FFD369;
   border-radius: 5px;
   padding: 10px;
-  color: #4b1e1e;
-  background-color: rgba(255, 255, 255, 0.517);
+  background-color: transparent;
 }
 
 label{
   font-size: 30px;
   font-weight: bold;
-  color: #4b1e1e;
-  border-bottom: solid 1px rgb(232, 78, 70);
+  border-bottom: solid 1px #FFD369;
   margin-bottom: 5px;
 }
 
@@ -131,10 +131,9 @@ button {
   width: 150px;
   height: 40px;
   font-size: 25px;
-  font-weight: bold;
-  background-color: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgb(232, 78, 70);
-  color: #4b1e1e;
+  color: #EEEEEE;
+  background-color: transparent;
+  border: 1px solid #FFD369;
   border-radius: 5px;
   text-align: center;
   margin: auto;
@@ -143,8 +142,8 @@ button {
   cursor: pointer;
 }
 
-button:hover {
-  height: 50px;
-  margin-bottom: 5px;
+button:hover{
+  color: #FFD369;
 }
+
 </style>

@@ -20,11 +20,11 @@ export default {
 
 <style scoped>
 #ad {
-  height: 68vh;
+  height: 100%;
   display: flex;
 }
 #ad-image {
-  max-height: 100%;
+  height: 75vh;
   max-width: 100%;
   margin: auto;
 }
