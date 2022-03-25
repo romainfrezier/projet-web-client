@@ -35,6 +35,7 @@ export default {
   },
   methods:{
     async sendData(){
+      console.log(process.env.VUE_APP_API)
       if (this.verifiyUsername(this.username) && this.verifiyPassword(this.password)){
         await axios.post(process.env.VUE_APP_API+"login/", { 
           username: this.$CryptoJS.AES.encrypt(this.username, `${process.env.VUE_APP_KEY}`).toString(),
