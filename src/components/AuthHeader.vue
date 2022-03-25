@@ -6,23 +6,26 @@
         <p>{{ status }}</p>
       </div>
       <div id="tab">
-        <router-link to="/search">🔎 Search</router-link>
+        <input type="text" name="searchBar" v-model="search" placeholder="🔎 Search an activity by name..." @keypress.enter="searchActivity()">
         <router-link v-if="isAdmin" to="/users">👨‍💻 Users</router-link>
+        <router-link v-if="this.status == 'Admin' || this.status == 'Premium'" to="/competitions">🏁 Competitions</router-link>
         <router-link to="/sports">⚽️ Sports 🎾</router-link>
         <router-link to="/profil">🙋‍♂️ My Profile</router-link>
       </div>
-      
     </nav>
   </div>
 </template>
 
 <script>
+import Notiflix from 'notiflix'
+
 export default {
   name: 'AuthHeader',
   data(){
     return {
       status:'',
       isAdmin: false,
+      search: '',
     }
   },
   beforeMount(){
@@ -38,6 +41,14 @@ export default {
       } else {
         this.status = "Classic"
       } 
+    },
+    searchActivity(){
+      if(this.search != ''){
+        const path = '/search/'+this.search
+        this.search = ''
+        location.replace(path)
+      }
+      else{Notiflix.Notify.info('You need to search something...')}
     }
   }
 }
@@ -102,6 +113,21 @@ nav {
   border-radius: 5px;
   padding: 20px;
   user-select: none;
+}
+
+input{
+  font-size: 20px;
+  height: 40%;
+  width: 25%;
+  margin-right: 0px;
+  margin-left: 30px;
+  font-weight: bold;
+  color: #EEEEEE;
+  background-color: transparent;
+  text-decoration: none;
+  border: #FFD369 solid 1px;
+  border-radius: 5px;
+  padding: 20px;
 }
 
 #tab a.router-link-exact-active {

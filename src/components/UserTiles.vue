@@ -9,7 +9,7 @@
             <p>Premium : {{ user.isPremium }}</p> 
           </div>
           <div class="button">
-            <button @click="writeUser(user.id, user.username, user.isPremium, user.isAdmin)" class="write">✍️</button>
+            <button @click="writeUser(user.id, user.username, user.isPremium, user.isAdmin)" class="write">✏️</button>
             <button @click="deleteUser(user.id, user.username)" class="delete">🚮</button>
           </div> 
         </li>
@@ -162,7 +162,7 @@ export default {
 <style scoped>
 
 .tiles{
-  height: 100%;
+  height: 90%;
   list-style: none;
   padding: 0;
   display: flex;
@@ -192,7 +192,6 @@ export default {
 }
 
 #name{
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
 

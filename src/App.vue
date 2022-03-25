@@ -69,8 +69,14 @@ table {
   src: url('./assets/LEMONMILK-Regular.otf');
 }
 
+@font-face {
+  font-family: "Roboto";
+  src: url('./assets/Roboto-Regular.ttf');
+}
+
 #app {
-  font-family: LemonMilk, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Roboto, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 20px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #EEEEEE;

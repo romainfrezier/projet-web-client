@@ -8,7 +8,7 @@
           <p>Period : {{ sport.sportPeriod }}</p>
         </div>
           <div v-if="isAdmin" class="button">
-            <button @click="writeSport(sport.id, sport.sportName, sport.sportPeriod)" class="write">✍️</button>
+            <button @click="writeSport(sport.id, sport.sportName, sport.sportPeriod)" class="write">✏️</button>
             <button @click="deleteSport(sport.id, sport.sportName)" class="delete">🚮</button>
           </div> 
       </li>
@@ -209,7 +209,7 @@ export default {
 <style scoped>
 
 .tiles{
-  height: 90%;
+  height: 80%;
   list-style: none;
   padding: 0;
   display: flex;

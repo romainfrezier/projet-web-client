@@ -3,8 +3,8 @@
         <li v-for="item in itemsAll" :key="item.id" class="tile">
             <div class="content">
               <p>{{ item.itemName }}</p>
-              <p>{{ item.sport }}</p>
-              <p>{{ item.usage }} km</p>
+              <p>{{ item.sportName }}</p>
+              <p v-if="item.usage">{{ item.usage }} km</p>
             </div>
             <div class="button">
               <button @click="deleteItem(item.id, item.itemName)" class="delete">🚮</button>
@@ -33,6 +33,16 @@ export default {
                 {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
                 .then(response => {
                     this.itemsAll = response.data
+                    this.itemsAll.forEach(item => {
+                        axios.get(process.env.VUE_APP_API+"sports/"+localStorage.getItem('user')+"/"+item.sportId,
+                        {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
+                            .then(response => {
+                                item.sportName = response.data[0].sportName
+                            })
+                            .catch(error => {
+                                console.log(error)
+                            })
+                    })
                 })
                 .catch(error => {
                     console.log(error)
@@ -66,7 +76,7 @@ export default {
                 Notiflix.Notify.info("Item " + name + " is not deleted", {closeButton:true})
             },
             { titleColor: "#ff5549", okButtonBackground: "#ff5549" })
-        }
+        },
     }
 }
 </script>
@@ -95,19 +105,25 @@ ul {
   text-align: center;
   display: grid;
   grid-template-columns: 70% 30%;
+  cursor: default;
 }
 
 .tile:hover{
   background-color: #393E46;
-  cursor: pointer;
 }
 
 .content{
-  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin-top: 10px;
   margin-bottom: 10px;
   user-select: none;
   grid-column: 1;
+}
+
+.content > p {
+  margin: auto;
 }
 
 .button{

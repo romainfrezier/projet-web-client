@@ -5,7 +5,6 @@
       <div id="activity">
         <p class="title">🏆 My Activities</p>
         <ActivityTiles/>
-        <button class="add"><router-link to="/activityForm">➕ Add</router-link></button>
       </div>
       <div id="stat">
         <p class="title">📶 My Stats</p>
@@ -240,7 +239,6 @@ export default {
 
 #buttons > button{
   margin: auto;
-  font-family: LemonMilk, Avenir, Helvetica, Arial, sans-serif;
   font-size: 25px;
   color: #222831;
   width: 30%;

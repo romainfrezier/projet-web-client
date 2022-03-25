@@ -7,8 +7,10 @@ import UsersView from '../views/UsersView.vue'
 import SportsView from '../views/SportsView.vue'
 import ProfilView from '../views/ProfilView.vue'
 import ItemView from '../views/ItemFormView.vue'
-import activityFormView from '../views/ActivityFormView.vue'
+import ActivityFormView from '../views/ActivityFormView.vue'
 import SearchView from '../views/SearchView.vue'
+import CompetitionsView from '../views/CompetitionsView.vue'
+import CompetitionFormView from '../views/CompetitionFormView.vue'
 
 const routes = [
   {
@@ -47,7 +49,7 @@ const routes = [
     component: ProfilView
   },
   {
-    path: '/search',
+    path: '/search/:name',
     name: 'search',
     component: SearchView
   },
@@ -57,9 +59,19 @@ const routes = [
     component: ItemView
   },
   {
-    path: '/activityForm',
+    path: '/activityForm/:id',
     name: 'activityForm',
-    component: activityFormView
+    component: ActivityFormView
+  },
+  {
+    path: '/competitions',
+    name: 'competitions',
+    component: CompetitionsView
+  },
+  {
+    path: '/competitions/form/:id',
+    name: 'competitionsForm',
+    component: CompetitionFormView
   }
 ]
 

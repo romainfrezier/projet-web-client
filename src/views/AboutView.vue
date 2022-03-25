@@ -83,7 +83,6 @@ export default {
   vertical-align: middle;
   height: 75vh;
   color: #393E46;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 
 .part1{
