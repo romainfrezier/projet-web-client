@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "npm run serve",
+    "start": "node server.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -13,8 +13,10 @@
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
     "crypto-js": "^4.1.1",
+    "express": "^4.17.3",
     "notiflix": "^3.2.5",
     "vue": "^3.2.13",
+    "vue-burger-menu": "^2.0.5",
     "vue-cryptojs": "^2.2.1",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
