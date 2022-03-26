@@ -36,48 +36,68 @@ const routes = [
   {
     path: '/users',
     name: 'users',
-    component: UsersView
+    component: UsersView,
+    meta: { requireAuth: true }
   },
   {
     path: '/sports',
     name: 'sports',
-    component: SportsView
+    component: SportsView,
+    meta: { requireAuth: true }
   },
   {
     path: '/profil',
     name: 'profil',
-    component: ProfilView
+    component: ProfilView,
+    meta: { requireAuth: true }
   },
   {
     path: '/search/:name',
     name: 'search',
-    component: SearchView
+    component: SearchView,
+    meta: { requireAuth: true }
   },
   {
     path: '/item',
     name: 'item',
-    component: ItemView
+    component: ItemView,
+    meta: { requireAuth: true }
   },
   {
     path: '/activityForm/:id',
     name: 'activityForm',
-    component: ActivityFormView
+    component: ActivityFormView,
+    meta: { requireAuth: true }
   },
   {
     path: '/competitions',
     name: 'competitions',
-    component: CompetitionsView
+    component: CompetitionsView,
+    meta: { requireAuth: true }
   },
   {
     path: '/competitions/form/:id',
     name: 'competitionsForm',
-    component: CompetitionFormView
+    component: CompetitionFormView,
+    meta: { requireAuth: true }
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    if (!localStorage.getItem("token")) {
+      next("/");
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 })
 
 export default router
