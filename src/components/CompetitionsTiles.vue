@@ -6,7 +6,7 @@
         <div class="content">
           <p>{{ compet.competName }}</p>
           <p>Sport : {{ compet.sportName }}</p>
-          <p>Date : {{ compet.competDate }}</p>
+          <p>Date : {{ compet.competDate.split('T')[0] }}</p>
           <p>Place : {{ compet.place }}</p>
         </div>
           <div class="button">
