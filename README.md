@@ -2,34 +2,15 @@
 
 Realization of a complete web application, in fullstack.
 
-Technologies used:
+Technologies and libraries used:
 - DB: PostgreSQL
 - Backend: Node.js, Express, PG, Sequelize, Bcrypt, Jsonwebtoken
-- Frontend: Vue.js
+- Frontend: Vue.js CLI, Express, Brcypt, Jsonwebtoken, Notiflix
+- Host on Heroku
 
 © Romain FREZIER
 
-_____
+___
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Website Link : https://poly-activitiz.herokuapp.com/
+Backend github : https://github.com/romainfrz/projet-web-api
