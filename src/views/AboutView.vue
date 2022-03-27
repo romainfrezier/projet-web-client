@@ -5,36 +5,36 @@
       <div class="part1">
         <p class="title">Personnal Presentation</p>
         <p class="content">
-          Hello everyone, my name is Romain, and I am a student in third
+          &emsp Hello everyone, my name is Romain, and I am a student in third
           year of engineering school at Polytech Montpellier in the IT sector
           and Management.<br>
-          I have been a big sports enthusiast since I was very young, and I like
+          &emsp I have been a big sports enthusiast since I was very young, and I like
           particularly mountain sports such as skiing, hiking or
           both at the same time!<br>
-          During my year at Polytech, a web project was organized and we
+          &emsp During my year at Polytech, a web project was organized and we
           had to create a site entirely, and that's how I created Poly-Activitiz!
         </p>
         <p class="title">Contact Me</p>
         <p class="content">
-          If you have a question, or a remark on this site, you can contact me
+          &emsp If you have a question, or a remark on this site, you can contact me
           at the following address: poly.activitiz@gmail.com and I will try 
           to answer as soon as possible.<br>
-          You can also find my work on GitHub by clicking on
+          &emsp You can also find my work on GitHub by clicking on
           <a href="https://github.com/romainfrz" style="color: #393E46;">this link</a> !
         </p>
       </div>
       <div class="part2">
         <p class="title">Web Site Presentation</p>
         <p class="content">
-          This website is the result of long hours of work. The objective is to 
+          &emsp This website is the result of long hours of work. The objective is to 
           allow all athletes, whether professional or not, to be able to follow 
           their sports activities. <br>
-          Through the management of activities, athletes will be able to consult 
+          &emsp Through the management of activities, athletes will be able to consult 
           their statistics, specific to each activity, or more generally. <br>
-          By subscribing to the Premium subscription, users will also be able to 
+          &emsp By subscribing to the Premium subscription, users will also be able to 
           manage their equipment, because we know that it is important to keep 
           equipment in good condition.<br>
-          Premium users will also be able to follow the competitions offered by 
+          &emsp Premium users will also be able to follow the competitions offered by 
           other users, in order to be always up to date with the latest news.<br>
           Many ideas are still being developed, so be sure to follow the evolution 
           of this application, and I'm sure you will be satisfied with the result!
