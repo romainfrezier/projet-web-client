@@ -5,60 +5,39 @@
       <div class="part1">
         <p class="title">Personnal Presentation</p>
         <p class="content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed harum
-          optio mollitia maxime! Qui voluptatem nemo voluptates fuga rem quod,
-          delectus libero, dolorem nesciunt voluptate ullam iste eligendi
-          doloribus asperiores a, itaque harum doloremque. Quas nobis facere
-          quasi, similique libero nostrum, dignissimos impedit voluptas
-          reiciendis labore iusto quos suscipit aperiam mollitia culpa, porro
-          aliquid quis quisquam dicta pariatur accusamus et animi alias vel.
-          Vero nisi soluta odio error. Modi quae tempora ex. Iusto obcaecati
-          nostrum ipsam accusantium facilis impedit ipsum est, ratione aliquid,
-          similique neque. Praesentium a quia eum numquam, alias repudiandae
-          odit molestias, omnis optio temporibus eaque officiis dolor.
+          Hello everyone, my name is Romain, and I am a student in third
+          year of engineering school at Polytech Montpellier in the IT sector
+          and Management.<br>
+          I have been a big sports enthusiast since I was very young, and I like
+          particularly mountain sports such as skiing, hiking or
+          both at the same time!<br>
+          During my year at Polytech, a web project was organized and we
+          had to create a site entirely, and that's how I created Poly-Activitiz!
         </p>
         <p class="title">Contact Me</p>
         <p class="content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed harum
-          optio mollitia maxime! Qui voluptatem nemo voluptates fuga rem quod,
-          delectus libero, dolorem nesciunt voluptate ullam iste eligendi
-          doloribus asperiores a, itaque harum doloremque. Quas nobis facere
-          quasi, similique libero nostrum, dignissimos impedit voluptas
-          reiciendis labore iusto quos suscipit aperiam mollitia culpa, porro
-          aliquid quis quisquam dicta pariatur accusamus et animi alias vel.
-          Vero nisi soluta odio error. Modi quae tempora ex. Iusto obcaecati
-          nostrum ipsam accusantium facilis impedit ipsum est, ratione aliquid,
-          similique neque. Praesentium a quia eum numquam, alias repudiandae
-          odit molestias, omnis optio temporibus eaque officiis dolor.
+          If you have a question, or a remark on this site, you can contact me
+          at the following address: poly.activitiz@gmail.com and I will try 
+          to answer as soon as possible.<br>
+          You can also find my work on GitHub by clicking on
+          <a href="https://github.com/romainfrz" style="color: #393E46;">this link</a> !
         </p>
       </div>
       <div class="part2">
         <p class="title">Web Site Presentation</p>
         <p class="content">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-          repudiandae aliquid eveniet laborum officiis molestiae corporis
-          quaerat, suscipit consequuntur perspiciatis non mollitia nisi
-          doloremque quis incidunt exercitationem iure et consequatur quasi
-          blanditiis similique ex labore voluptatem sit! Autem iure modi enim
-          blanditiis odio, voluptas facilis quas eaque illum eveniet, deleniti
-          veniam placeat eligendi vel cumque consequuntur voluptatem tempora ex
-          perferendis impedit excepturi natus provident, minus voluptate?
-          Nesciunt voluptate nostrum perspiciatis porro omnis? Repellat eveniet,
-          a voluptate exercitationem similique adipisci illum quaerat minus
-          vitae, nesciunt, accusamus voluptas! Mollitia, optio eum saepe amet
-          nulla ipsam harum officia assumenda consequatur nesciunt esse
-          exercitationem illum consectetur eveniet veritatis quidem fugit
-          necessitatibus modi labore. Magnam qui dolorum sapiente dolore
-          tenetur, officiis incidunt fugiat autem suscipit cupiditate omnis
-          deleniti porro doloremque sed, tempora maxime rem quos voluptates
-          alias eaque necessitatibus magni vitae quam? Eum fugiat in deserunt
-          tenetur quia quos molestiae eaque ad dignissimos, consequatur corporis
-          recusandae enim ducimus voluptatem exercitationem quod rem? Quos dicta
-          placeat cum dolor nulla libero inventore repellat modi velit
-          recusandae, perferendis beatae neque facere quis? Sit, ut? Impedit
-          rem, libero commodi, deserunt mollitia dolorum facere illum asperiores
-          ab sit adipisci dolore officia, reiciendis ratione explicabo dicta
-          quo. Labore officiis dignissimos sequi.
+          This website is the result of long hours of work. The objective is to 
+          allow all athletes, whether professional or not, to be able to follow 
+          their sports activities. <br>
+          Through the management of activities, athletes will be able to consult 
+          their statistics, specific to each activity, or more generally. <br>
+          By subscribing to the Premium subscription, users will also be able to 
+          manage their equipment, because we know that it is important to keep 
+          equipment in good condition.<br>
+          Premium users will also be able to follow the competitions offered by 
+          other users, in order to be always up to date with the latest news.<br>
+          Many ideas are still being developed, so be sure to follow the evolution 
+          of this application, and I'm sure you will be satisfied with the result!
         </p>
       </div>  
     </div>
