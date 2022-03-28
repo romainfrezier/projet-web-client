@@ -231,6 +231,7 @@ export default {
   margin-bottom: 20px;
   padding: 10px;
   width: 45%;
+  min-width: 250px;
   border: #222831 1px solid;
   border-radius: 10px;
   background-color: #22283180;

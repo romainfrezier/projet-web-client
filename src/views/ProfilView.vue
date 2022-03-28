@@ -174,12 +174,38 @@ export default {
 </script>
 
 <style scoped>
-#content {
+@media screen and (max-width: 1023px) {
+  #content {
   height: 70vh;
-  display: grid;
-  grid-template-rows: 60% 40%;
-  grid-template-columns: 40% 30% 30%;
   overflow-y: scroll;
+  }
+  #buttons > button{
+    font-size: 15px;
+    height: 100px;
+  }
+
+  #buttons > button:hover{
+    font-size: 17px;
+  }
+}
+
+@media screen and (min-width: 1023px){
+  #content {
+    height: 70vh;
+    display: grid;
+    grid-template-rows: 60% 40%;
+    grid-template-columns: 40% 30% 30%;
+    overflow-y: scroll;
+  }
+  #buttons > button{
+    font-size: 25px;
+    height: 80%;
+
+  }
+
+  #buttons > button:hover{
+    font-size: 27px;
+  }
 }
 
 #all{
@@ -242,10 +268,8 @@ export default {
 
 #buttons > button{
   margin: auto;
-  font-size: 25px;
   color: #222831;
   width: 30%;
-  height: 80%;
   padding: 10px;
   border-radius: 10px;
   background-color: transparent;
@@ -264,21 +288,18 @@ export default {
 #del:hover{
   border: 3px solid red;
   background-color: red;
-  font-size: 27px;
   cursor: pointer;
 }
 
 #prem:hover{
   border: 3px solid gold;
   background-color: gold;
-  font-size: 27px;
   cursor: pointer;
 }
 
 #logout:hover{
   border: 3px solid rgb(77, 109, 214);
   background-color: rgb(77, 109, 214);
-  font-size: 27px;
   cursor: pointer;
 }
 

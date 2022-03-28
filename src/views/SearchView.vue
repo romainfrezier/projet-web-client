@@ -190,7 +190,7 @@ ul {
 .tiles{
   margin-top: 10px;
   overflow-y: scroll;
-  height: 50vh;
+  height: 70vh;
   margin-bottom: 15px;
 }
 
