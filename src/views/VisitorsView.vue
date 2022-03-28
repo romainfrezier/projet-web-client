@@ -23,12 +23,11 @@ export default {
 
 <style scoped>
 #ad {
-  height: 100%;
+  height: 75vh;
   display: flex;
 }
 #ad-image {
-  height: 75vh;
-  max-width: 100%;
+  width: 100%;
   margin: auto;
 }
 </style>
