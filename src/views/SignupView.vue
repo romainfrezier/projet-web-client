@@ -13,6 +13,7 @@
         </form>
       </div>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import axios from "axios";
 import router from "../router/index.js";
 import Visitors from "../components/VisitorsHead.vue";
 import Notiflix from 'notiflix'
+import Footer from "../components/FooterAll.vue"
 
 export default {
   data() {
@@ -32,6 +34,7 @@ export default {
   name: "VisitorsView",
   components: {
     Visitors,
+    Footer
   },
   methods: {
     sendData() {

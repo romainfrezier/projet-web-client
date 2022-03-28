@@ -4,18 +4,21 @@
     <div id="content">
       <SportTiles/>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import NavBar from "../components/AuthHeader.vue";
 import SportTiles from "../components/SportTiles.vue"
+import Footer from "../components/FooterAll.vue"
 
 export default {
   name: "SportsView",
   components: {
     NavBar,
-    SportTiles
+    SportTiles,
+    Footer
   },
 };
 </script>

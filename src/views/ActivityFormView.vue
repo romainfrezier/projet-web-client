@@ -33,6 +33,7 @@
       <input type="number" name="time" v-model="time" min="1" max="900" />
       <button type="submit" class="btn">Submit</button>
     </form>
+    <Footer/>
   </div>
 </template>
 
@@ -44,6 +45,7 @@ import Datepicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import { ref } from "vue";
 import router from "../router/index.js";
+import Footer from "../components/FooterAll.vue"
 
 export default {
   name: "ActivityFromView",
@@ -76,6 +78,7 @@ export default {
   components: {
     NavBar,
     Datepicker,
+    Footer
   },
   beforeMount() {
     this.getSports();

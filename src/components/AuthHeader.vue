@@ -55,10 +55,6 @@ export default {
 </script>
 
 <style scoped>
-#headerAuth{
-  position: sticky;
-  top: 0;
-}
 
 nav {
   background-color: #222831;

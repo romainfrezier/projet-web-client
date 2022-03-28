@@ -41,16 +41,19 @@
         </p>
       </div>  
     </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Visitors from "../components/VisitorsHead.vue";
+import Footer from "../components/FooterAll.vue"
 
 export default {
   name: "VisitorsView",
   components: {
     Visitors,
+    Footer
   },
 };
 </script>

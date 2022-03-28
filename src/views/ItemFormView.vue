@@ -14,7 +14,8 @@
             </select>
             <button type="submit" class="btn">Submit</button>
         </form>
-        </div>
+        <Footer/>
+    </div>
 </template>
 
 <script>
@@ -22,6 +23,7 @@ import axios from 'axios'
 import Notiflix from 'notiflix'
 import NavBar from '../components/AuthHeader.vue'
 import router from '../router/index.js'
+import Footer from "../components/FooterAll.vue"
 
 export default {
     name: 'ItemView',
@@ -35,6 +37,7 @@ export default {
     },
     components: {
         NavBar,
+        Footer
     },
     beforeMount(){
         this.getSports()

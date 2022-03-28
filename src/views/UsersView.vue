@@ -4,18 +4,21 @@
     <div id="content">
       <User/>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import NavBar from "../components/AuthHeader.vue";
 import User from "../components/UserTiles.vue"
+import Footer from "../components/FooterAll.vue"
 
 export default {
   name: "UsersView",
   components: {
     NavBar,
-    User
+    User,
+    Footer,
   },
 };
 </script>

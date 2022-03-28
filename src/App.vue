@@ -2,17 +2,13 @@
   <div id="app">
     <router-link to="/"></router-link>
     <router-view></router-view>
-    <Footer/>
   </div>
 </template>
 
 <script>
-import Footer from "./components/FooterAll.vue"
-
 export default {
   name: "UsersView",
   components: {
-    Footer
   },
 }
 </script>

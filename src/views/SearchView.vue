@@ -34,6 +34,7 @@
                 <p>No activities found with this name...</p>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
@@ -42,11 +43,13 @@ import NavBar from '../components/AuthHeader.vue'
 import axios from 'axios'
 import Notiflix from 'notiflix'
 import router from '../router/index.js'
+import Footer from "../components/FooterAll.vue"
 
 export default {
     name: 'SearchView',
     components:{
-        NavBar
+        NavBar,
+        Footer
     },
     data(){
         return {

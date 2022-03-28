@@ -27,6 +27,7 @@
         </div>
       </div>
     </div>
+    <Footer/>
   </div>
 </template>
 
@@ -38,6 +39,7 @@ import ActivityTiles from "../components/ActivityTiles.vue"
 import ItemTiles from "../components/ItemTiles.vue"
 import StatTiles from "../components/StatTiles.vue"
 import router from "../router/index";
+import Footer from "../components/FooterAll.vue"
 
 export default {
   name: "ProfilView",
@@ -45,7 +47,8 @@ export default {
     NavBar,
     ActivityTiles,
     ItemTiles,
-    StatTiles
+    StatTiles,
+    Footer
   },
   data(){
     return {

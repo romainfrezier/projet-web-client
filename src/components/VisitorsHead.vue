@@ -16,10 +16,6 @@ export default {
 </script>
 
 <style scoped>
-#headerVisitor{
-  position: sticky;
-  top: 0;
-}
 
 nav {
   margin-top: 0px;

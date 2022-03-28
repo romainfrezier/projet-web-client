@@ -17,8 +17,8 @@ export default {
 
 <style>
 #footer {
-  position: sticky;
-  bottom: 0px;
+  position: relative;
+  bottom: 0;
   height: 10vh;
   background-color: #222831;
   width: 100%;
