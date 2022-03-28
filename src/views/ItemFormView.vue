@@ -51,11 +51,11 @@ export default {
                 })
             .catch(error =>{
                 if(error.message.toString().includes('401')){
-                    Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+                    Notiflix.Notify.failure("Unauthorized...")
                 } else if(error.toString().includes('500')){
-                    Notiflix.Notify.failure("Server Error...", {closeButton:true})
+                    Notiflix.Notify.failure("Server Error...")
                 } else {
-                    Notiflix.Notify.failure("An error occured", {closeButton:true})
+                    Notiflix.Notify.failure("An error occured")
                 }
                 console.log(error)
                 })
@@ -74,15 +74,15 @@ export default {
                 .then(response => {
                   console.log(response)
                   router.push('/profil')
-                  Notiflix.Notify.success("Item created", {closeButton:true})
+                  Notiflix.Notify.success("Item created")
                 })
                 .catch(error =>{
                 if(error.message.toString().includes('401')){
-                    Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+                    Notiflix.Notify.failure("Unauthorized...")
                 } else if(error.toString().includes('500')){
-                    Notiflix.Notify.failure("Server Error...", {closeButton:true})
+                    Notiflix.Notify.failure("Server Error...")
                 } else {
-                    Notiflix.Notify.failure("An error occured", {closeButton:true})
+                    Notiflix.Notify.failure("An error occured")
                 }
                 console.log(error)
                 })

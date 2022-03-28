@@ -83,22 +83,22 @@ export default {
           axios.delete(process.env.VUE_APP_API+"competitions/"+localStorage.getItem("user").toString()+"/"+id,
             {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
             .then(response => {
-              Notiflix.Notify.success("Competition " + name + " deleted with succes", {closeButton:true})
+              Notiflix.Notify.success("Competition " + name + " deleted with succes")
               setTimeout("location.reload(true)", 2000)
               console.log(response)
               })
             .catch(error =>{
               if(error.message.toString().includes('401')){
-                Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+                Notiflix.Notify.failure("Unauthorized...")
               } else if(error.toString().includes('500')){
-                Notiflix.Notify.failure("Server Error...", {closeButton:true})
+                Notiflix.Notify.failure("Server Error...")
               } else {
-                Notiflix.Notify.failure("An error occured", {closeButton:true})
+                Notiflix.Notify.failure("An error occured")
               }
               console.log(error)})
           },
         () => {
-          Notiflix.Notify.info("Competition " + name + " is not deleted", {closeButton:true})
+          Notiflix.Notify.info("Competition " + name + " is not deleted")
         },
         { titleColor: "#ff5549", okButtonBackground: "#ff5549" })
     },

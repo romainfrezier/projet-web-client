@@ -91,22 +91,22 @@ export default {
                     {isPremium: false},
                     {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
                     .then(response => {
-                      Notiflix.Notify.success("Premium subscription leaved with succes", {closeButton:true})
+                      Notiflix.Notify.success("Premium subscription leaved with succes")
                       setTimeout("location.reload(true)", 2000)
                       console.log(response)
                       localStorage.setItem("isPremium", "false")})
                     .catch(error =>{
                       if(error.message.toString().includes('401')){
-                        Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+                        Notiflix.Notify.failure("Unauthorized...")
                       } else if(error.toString().includes('500')){
-                        Notiflix.Notify.failure("Server Error...", {closeButton:true})
+                        Notiflix.Notify.failure("Server Error...")
                       } else {
-                        Notiflix.Notify.failure("An error occured", {closeButton:true})
+                        Notiflix.Notify.failure("An error occured")
                       }
                       console.log(error)})
                 },
                 () => {
-                  Notiflix.Notify.info("Premium subscription is still alive", {closeButton:true})
+                  Notiflix.Notify.info("Premium subscription is still alive")
                 },
                 { titleColor: "goldenrod", okButtonBackground: "goldenrod" })
       } else if (this.premium == "Get"){
@@ -120,22 +120,22 @@ export default {
                     {isPremium: true},
                     {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
                     .then(response => {
-                      Notiflix.Notify.success("Premium subscription successfully obtained", {closeButton:true})
+                      Notiflix.Notify.success("Premium subscription successfully obtained")
                       setTimeout("location.reload(true)", 2000)
                       console.log(response)
                       localStorage.setItem("isPremium", "true")})
                     .catch(error =>{
                       if(error.message.toString().includes('401')){
-                        Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+                        Notiflix.Notify.failure("Unauthorized...")
                       } else if(error.toString().includes('500')){
-                        Notiflix.Notify.failure("Server Error...", {closeButton:true})
+                        Notiflix.Notify.failure("Server Error...")
                       } else {
-                        Notiflix.Notify.failure("An error occured", {closeButton:true})
+                        Notiflix.Notify.failure("An error occured")
                       }
                       console.log(error)})
                 },
                 () => {
-                  Notiflix.Notify.info("Premium subscription is still available", {closeButton:true})
+                  Notiflix.Notify.info("Premium subscription is still available")
                 },
                 { titleColor: "goldenrod", okButtonBackground: "goldenrod" })
       }
@@ -150,22 +150,22 @@ export default {
           axios.delete(process.env.VUE_APP_API+"users/"+localStorage.getItem("user").toString()+"/"+localStorage.getItem("user").toString()+"/",
             {headers: {Authorization : `Bearer ${localStorage.getItem("token")}`}})
             .then(response => {
-              Notiflix.Notify.success("Your account has been deleted...", {closeButton:true})
+              Notiflix.Notify.success("Your account has been deleted...")
               setTimeout(router.push('/'), 2000)
               console.log(response)
               localStorage.setItem("isPremium", "true")})
             .catch(error =>{
               if(error.message.toString().includes('401')){
-                Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+                Notiflix.Notify.failure("Unauthorized...")
               } else if(error.toString().includes('500')){
-                Notiflix.Notify.failure("Server Error...", {closeButton:true})
+                Notiflix.Notify.failure("Server Error...")
               } else {
-                Notiflix.Notify.failure("An error occured", {closeButton:true})
+                Notiflix.Notify.failure("An error occured")
               }
               console.log(error)})
         },
         () => {
-          Notiflix.Notify.info("Your account is still alive", {closeButton:true})
+          Notiflix.Notify.info("Your account is still alive")
         },
         { titleColor: "#ff5549", okButtonBackground: "#ff5549" })
     },

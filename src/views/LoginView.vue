@@ -53,19 +53,19 @@ export default {
         })
         .catch(error =>{
           if(error.message.toString().includes('401')){
-            Notiflix.Notify.failure("Wrong password or username", {closeButton:true})
+            Notiflix.Notify.failure("Wrong password or username")
           } else if(error.toString().includes('500')){
-            Notiflix.Notify.failure("Server Error...", {closeButton:true})
+            Notiflix.Notify.failure("Server Error...")
           } else {
-            Notiflix.Notify.failure("An error occured", {closeButton:true})
+            Notiflix.Notify.failure("An error occured")
           }
         })
       } else if (!this.verifiyUsername(this.username) && !this.verifiyPassword(this.password)){
-        Notiflix.Notify.failure("Please enter a valid username and password.", {closeButton:true})
+        Notiflix.Notify.failure("Please enter a valid username and password.")
       } else if (this.verifiyUsername(this.username) && !this.verifiyPassword(this.password)){
-        Notiflix.Notify.failure("Please enter a valid password", {closeButton:true})
+        Notiflix.Notify.failure("Please enter a valid password")
       } else if (!this.verifiyUsername(this.username) && this.verifiyPassword(this.password)){
-        Notiflix.Notify.failure("Please enter a valid username", {closeButton:true})
+        Notiflix.Notify.failure("Please enter a valid username")
       }
       
     },

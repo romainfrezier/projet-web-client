@@ -115,21 +115,21 @@ export default {
             .then(response => {
                 console.log(response)
                 router.push("/competitions")
-                Notiflix.Notify.success("Competition created !", {closeButton:true})
+                Notiflix.Notify.success("Competition created !")
             })
             .catch(error => {
                 if(error.message.toString().includes('401')){
-                  Notiflix.Notify.failure("Unauthorized...", {closeButton:true})
+                  Notiflix.Notify.failure("Unauthorized...")
                 } else if(error.toString().includes('500')){
-                  Notiflix.Notify.failure("Server Error...", {closeButton:true})
+                  Notiflix.Notify.failure("Server Error...")
                 } else if (error.toString().includes("400")) {
                     Notiflix.Notify.failure("Still fields to fill...", { closeButton: true });
                 } else {
-                  Notiflix.Notify.failure("An error occured", {closeButton:true})
+                  Notiflix.Notify.failure("An error occured")
                 }
                 console.log(error)})},
           () => {
-            Notiflix.Notify.info("Competition is not created", {closeButton:true})
+            Notiflix.Notify.info("Competition is not created")
           },
           { titleColor: "#ff5549", okButtonBackground: "#ff5549" })
         } else {
