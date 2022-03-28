@@ -59,12 +59,19 @@ export default {
 </script>
 <style scoped>
 
+@media screen and (min-width: 1024px) {
+  #about {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    vertical-align: middle;
+  }
+}
+
 #about {
-  display: grid;
-  grid-template-columns: 50% 50%;
   vertical-align: middle;
-  height: 75vh;
+  height: 65vh;
   color: #393E46;
+  overflow-y: scroll;
 }
 
 .part1{
