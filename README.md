@@ -14,4 +14,4 @@ ___
 
 Website Link : https://poly-activitiz.herokuapp.com/
 
-Backend github : https://github.com/romainfrz/projet-web-api
+Backend github : https://github.com/romainfrezier/projet-web-api
